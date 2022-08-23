@@ -23,8 +23,9 @@ $inspection = new Inspection(
     [ 
         new Theme(
         "Orde en netheid",
-            [new Finding(
-                "omschrijving bevinging 1 1",
+            [
+                new Finding(
+                "omschrijving bevinding 1 1",
                 "type 1",
                 "collega's 1",
                 "afdeling 1",
@@ -56,7 +57,41 @@ $inspection = new Inspection(
                         "26-08-2022"
                     )
                 ]
-                    )
+                    ),
+                new Finding(
+                    "omschrijving bevinding deel 2",
+                    "Ook een type",
+                    "Collega's die meeliepen",
+                    "afdeling 2",
+                    [
+                        "http://placekitten.com/600/450", 
+                        "http://placekitten.com/500/300"
+                    ],
+                    "acties genomen 1",
+                    [
+                        new FollowUpAction(
+                            "omschrijving 1",
+                            "type 1",
+                            "actiehouder a 1",
+                            "actiehouder b 1",
+                            "24-08-2022"
+                        ),
+                        new FollowUpAction(
+                            "omschrijving 2",
+                            "type 2",
+                            "actiehouder a 2",
+                            "actiehouder b 2",
+                            "25-08-2022"
+                        ),
+                        new FollowUpAction(
+                            "omschrijving 3",
+                            "type 3",
+                            "actiehouder a 3",
+                            "actiehouder b 3",
+                            "26-08-2022"
+                        )
+                    ]
+                        )
     ]),
                     new Theme(
         "Veiligheid",
@@ -198,7 +233,7 @@ if(count($finding->get('images')) > 0) {
 if(count($finding->get('followUpActions')) > 0) {
 
     $mpdf->WriteHTML('
-    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>
+    <p style="margin-left:1rem"><b>Vervolgacties</b></p>
     ');
 
     for ($i=0; $i < count($finding->get('followUpActions')) ; $i++) { 
