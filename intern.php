@@ -3,6 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 require __DIR__ . '/Report.class.php';
+require __DIR__ . '/FollowUpAction.class.php';
 
 // Voorbeeldrapportage
 $rapport = new Report(
@@ -43,20 +44,20 @@ $rapport = new Report(
     "Library is gedownload. Het begin van de template is gemaakt",
     "23-08-2022",
     [
-        [
-        "actie" => "Styling voorleggen aan Renko / Lorentz",
-        "internExtern" => "intern",
-        "voorgesteldeActiehouder" => "Renko",
-        "daadwerkelijkeActiehouder" => "Roy",
-        "plandatum" => "23 aug 2022"
-        ],
-        [
-        "actie" => "Andere pagina's maken",
-        "internExtern" => "intern",
-        "voorgesteldeActiehouder" => "Roy",
-        "daadwerkelijkeActiehouder" => "ook Roy",
-        "plandatum" => "23 aug 2022"
-        ]
+        new FollowUpAction(
+            "Styling voorleggen aan Renko / Lorentz",
+            "intern",
+            "Renko",
+            "Roy",
+            "23 aug 2022"
+        ),
+        new FollowUpAction(
+            "Andere pagina's maken",
+            "intern",
+            "Roy",
+            "Roy",
+            "23 aug 2022"
+        )
     ],
     "Doeltreffendheid is hoog"
 );
@@ -201,7 +202,7 @@ if(count($rapport->get('vervolgacties')) > 0) {
                 <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
             </tr>
             <tr class="vervolgactie-omschrijving">
-                <td colspan="5">' . $rapport->get('vervolgacties')[$i]['actie'] . '</td>
+                <td colspan="5">' . $rapport->get('vervolgacties')[$i]->get('description') . '</td>
             </tr>
             <tr>
                 <td><b>Intern/extern</b></td>
@@ -210,10 +211,10 @@ if(count($rapport->get('vervolgacties')) > 0) {
                 <td><b>Plandatum</b></td>
             </tr>
             <tr>
-                <td>' . $rapport->get('vervolgacties')[$i]['internExtern'] . '</td>
-                <td>' . $rapport->get('vervolgacties')[$i]['voorgesteldeActiehouder'] . '</td>
-                <td>' . $rapport->get('vervolgacties')[$i]['daadwerkelijkeActiehouder'] . '</td>
-                <td>' . $rapport->get('vervolgacties')[$i]['plandatum'] . '</td>
+                <td>' . $rapport->get('vervolgacties')[$i]->get('actionType') . '</td>
+                <td>' . $rapport->get('vervolgacties')[$i]->get('reportedActionHolder') . '</td>
+                <td>' . $rapport->get('vervolgacties')[$i]->get('linkedActionHolder') . '</td>
+                <td>' . $rapport->get('vervolgacties')[$i]->get('plannedDate') . '</td>
             </tr>
         </table>
         ');
