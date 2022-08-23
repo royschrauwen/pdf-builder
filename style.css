@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+}
+
+table {
+  width: 100%;
+  page-break-inside: avoid;
+}
+
+.page-header {
+  border-bottom: 2px solid #70bd95;
+  padding-bottom: 0.5rem;
+  /* border-collapse: separate;
+  border-spacing: 0 0.5em; */
+}
+
+.header-logo {
+  width: 200px;
+  margin-right: 2rem;
+}
+
+.werktitel {
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+.page-header img {
+  padding-inline-end: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.rapport-afbeeldingen {
+  page-break-inside: auto;
+  vertical-align: top;
+}
+
+.rapport-afbeelding {
+  padding: 0.25rem 0;
+  max-width: 8.5cm;
+}
+
+.page-footer {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 2px solid #70bd95;
+  text-align: center;
+}
+
+.page-content {
+  margin-top: 1em;
+}
+
+.page-content table {
+  /* margin-bottom: 1rem; */
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+
+.vervolgacties {
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid silver;
+}
