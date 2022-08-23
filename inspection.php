@@ -167,7 +167,7 @@ if(count($finding->get('images')) > 0) {
     $mpdf->WriteHTML('
     <div class="inspection-images">
 
-    <p style="margin-left:2rem"><b>Afbeeldingen</b></p>
+    <p style="margin-left:1rem"><b>Afbeeldingen</b></p>
     
     <table>
     ');
