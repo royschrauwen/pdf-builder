@@ -133,6 +133,10 @@ $rapport = new Report(
 $mpdf = new \Mpdf\Mpdf(['setAutoTopMargin' => 'stretch']);
 
 $stylesheet = file_get_contents('style.css');
+
+
+$mpdf->SetTitle($rapport->get('registratienummer'));
+
 $mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
 
 
@@ -326,4 +330,4 @@ $mpdf->WriteHTML('
 ');
 
 
-$mpdf->Output();
+$mpdf->Output($rapport->get('registratienummer').'.pdf', 'I');
