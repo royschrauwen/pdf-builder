@@ -2,8 +2,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-require __DIR__ . '/Report.class.php';
-require __DIR__ . '/FollowUpAction.class.php';
+require_once __DIR__ . '/Equans.class.php';
+require_once __DIR__ . '/Report.class.php';
+require_once __DIR__ . '/FollowUpAction.class.php';
 
 // Voorbeeldrapportage
 $rapport = new Report(
