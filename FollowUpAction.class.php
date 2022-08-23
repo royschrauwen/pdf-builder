@@ -4,7 +4,7 @@ require_once __DIR__ . '/Equans.class.php';
 /**
  * EQUANS PDF Reports
  *
- * @copyright  2022 Aptic - Roy Schrauwen
+ * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
  */ 
