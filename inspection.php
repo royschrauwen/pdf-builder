@@ -182,9 +182,50 @@ if(count($finding->get('images')) > 0) {
         $mpdf->WriteHTML('
         <div class="inspection-finding">
 
-        <p><b>Reeds genomen acties</b><br>' . $finding->get('actionsTaken') . '</p>
+        <p><b>Reeds genomen acties</b><br>' . $finding->get('actionsTaken') . '</p>');
 
-        <p><b>Vervolgacties</b></p>
+
+
+
+// Vervolgacties indien aanwezig
+if(count($finding->get('followUpActions')) > 0) {
+
+    $mpdf->WriteHTML('
+    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>
+    ');
+
+    for ($i=0; $i < count($finding->get('followUpActions')) ; $i++) { 
+        $mpdf->WriteHTML('
+        <table class="vervolgacties">
+            <tr>
+                <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+            </tr>
+            <tr class="vervolgactie-omschrijving">
+                <td colspan="5">' . $finding->get('followUpActions')[$i]->get('description') . '</td>
+            </tr>
+            <tr>
+                <td><b>Intern/extern</b></td>
+                <td><b>Voorgestelde actiehouder</b></td>
+                <td><b>Daadwerkelijke actiehouder</b></td>
+                <td><b>Plandatum</b></td>
+            </tr>
+            <tr>
+                <td>' . $finding->get('followUpActions')[$i]->get('actionType') . '</td>
+                <td>' . $finding->get('followUpActions')[$i]->get('reportedActionHolder') . '</td>
+                <td>' . $finding->get('followUpActions')[$i]->get('linkedActionHolder') . '</td>
+                <td>' . $finding->get('followUpActions')[$i]->get('plannedDate') . '</td>
+            </tr>
+        </table>
+        ');
+    }
+}
+
+
+
+
+
+
+        $mpdf->WriteHTML('
 
         </div>
         
