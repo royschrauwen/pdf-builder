@@ -47,6 +47,13 @@ $inspection = new Inspection(
                         "actiehouder a 2",
                         "actiehouder b 2",
                         "25-08-2022"
+                    ),
+                    new FollowUpAction(
+                        "omschrijving 3",
+                        "type 3",
+                        "actiehouder a 3",
+                        "actiehouder b 3",
+                        "26-08-2022"
                     )
                 ]
                     )
