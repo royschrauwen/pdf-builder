@@ -29,8 +29,8 @@ $inspection = new Inspection(
                 "collega's 1",
                 "afdeling 1",
                 [
-                    "http://placekitten.com/800/450", 
-                    "http://placekitten.com/640/480"
+                    "http://placekitten.com/400/300", 
+                    "http://placekitten.com/1200/900"
                 ],
                 "acties genomen 1",
                 [
@@ -60,8 +60,8 @@ $inspection = new Inspection(
                 "collega's 2",
                 "afdeling 2",
                 [
-                    "http://placekitten.com/300/450",  
-                    "http://placekitten.com/300/300"
+                    "http://placekitten.com/800/600",  
+                    "http://placekitten.com/1600/1200"
                 ],
                 "acties genomen 2",
                 [
@@ -152,12 +152,18 @@ foreach ($inspection->get('themes') as $theme) {
         <p><b>Omschrijving</b><br>' . $finding->get('description') . '</p>
         <p><b>Type</b><br>' . $finding->get('type') . '</p>
         <p><b>Gesproken met</b><br>' . $finding->get('collegues') . ' - ' . $finding->get('department') . '</p>
-
+        </div>
         ');
 
 // Afbeeldingen, max 2 per rij
 if(count($finding->get('images')) > 0) {
-    $mpdf->WriteHTML('<table class="rapport-afbeeldingen rapport-section">');
+    $mpdf->WriteHTML('
+    <div class="inspection-images">
+
+    <p style="margin-left:2rem"><b>Afbeeldingen</b></p>
+    
+    <table>
+    ');
     foreach (array_chunk($finding->get('images'), 2) as $row) {
         $mpdf->WriteHTML('<tr>');
         foreach ($row as $value) { 
@@ -169,15 +175,16 @@ if(count($finding->get('images')) > 0) {
         } 
         $mpdf->WriteHTML('</tr>');
     }
-    $mpdf->WriteHTML('</table>');
+    $mpdf->WriteHTML('</table></div>');
 }
 
 
         $mpdf->WriteHTML('
+        <div class="inspection-finding">
 
         <p><b>Reeds genomen acties</b><br>' . $finding->get('actionsTaken') . '</p>
 
-        <p>Vervolgacties</p>
+        <p><b>Vervolgacties</b></p>
 
         </div>
         
