@@ -65,3 +65,18 @@ table {
   padding: 0.5rem;
   border: 1px solid silver;
 }
+
+.inspection-theme {
+  /* background-color: pink; */
+  border-top: 1px solid silver;
+}
+
+.inspection-theme-header {
+  /* background-color: turquoise; */
+  padding: 0.5rem;
+}
+
+.inspection-finding {
+  /* background-color: orange; */
+  padding-left: 2rem;
+}

@@ -1,32 +1,21 @@
 <?php
 /**
- * EQUANS PDF Inspection PDF
+ * EQUANS PDF Inspection PDF Theme
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
  */ 
-class Inspection {
-    
+class Theme {
+
     function __construct(
-    private string $id,
-    private string $type,
-    private string $date,
-    private string $department,
+        private string $themeName,
+        private array $findings
+    )
+    {}
 
-    private string $reportedByName,
-    private string $reportedByPhone,
-    private string $presentColleagues,
 
-    private string $projectNameNumber,
-    private string $clientName,
-    private string $locationDescription,
-
-    private array $themes,
-
-    ) {}
-
-    /**
+        /**
      * Get's the value of an object's property.
      *
      * @param string $property The property to be retreived
@@ -49,6 +38,5 @@ class Inspection {
         $this->{$property} = $value;
     }
 
-    
+
 }
-?>

@@ -5,6 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Inspection.class.php';
 require_once __DIR__ . '/Finding.class.php';
 require_once __DIR__ . '/FollowUpAction.class.php';
+require_once __DIR__ . '/Theme.class.php';
 
 // Voorbeeldrapportage
 $inspection = new Inspection(
@@ -18,32 +19,69 @@ $inspection = new Inspection(
     "Exporteren rapportages naar PDF - 01293213",
     "Renko van den Hout",
     "Kantoor Aptic",
-    "Veiligheid",
-    [
-        new Finding(
-            "omschrijving",
-            "type",
-            "collega's",
-            "afdeling",
-            ["afbeeldingen"],
-            "acties genomen",
-            [
-                new FollowUpAction(
-                    "omschrijving 1",
-                    "type 1",
-                    "actiehouder a 1",
-                    "actiehouder b 1",
-                    "24-08-2022"
-                ),
-                new FollowUpAction(
-                    "omschrijving 2",
-                    "type 2",
-                    "actiehouder a 2",
-                    "actiehouder b 2",
-                    "25-08-2022"
-                )
-            ]
-        )
+
+    [ 
+        new Theme(
+        "Orde en netheid",
+            [new Finding(
+                "omschrijving bevinging 1 1",
+                "type 1",
+                "collega's 1",
+                "afdeling 1",
+                [
+                    "http://placekitten.com/800/450", 
+                    "http://placekitten.com/640/480"
+                ],
+                "acties genomen 1",
+                [
+                    new FollowUpAction(
+                        "omschrijving 1",
+                        "type 1",
+                        "actiehouder a 1",
+                        "actiehouder b 1",
+                        "24-08-2022"
+                    ),
+                    new FollowUpAction(
+                        "omschrijving 2",
+                        "type 2",
+                        "actiehouder a 2",
+                        "actiehouder b 2",
+                        "25-08-2022"
+                    )
+                ]
+                    )
+    ]),
+                    new Theme(
+        "Veiligheid",
+        [
+            new Finding(
+                "omschrijving van thema 2",
+                "type 2",
+                "collega's 2",
+                "afdeling 2",
+                [
+                    "http://placekitten.com/300/450",  
+                    "http://placekitten.com/300/300"
+                ],
+                "acties genomen 2",
+                [
+                    new FollowUpAction(
+                        "omschrijving 3",
+                        "type 13",
+                        "actiehouder a 3",
+                        "actiehouder b 3",
+                        "24-08-2022"
+                    ),
+                    new FollowUpAction(
+                        "omschrijving 4",
+                        "type 4",
+                        "actiehouder a 4",
+                        "actiehouder b 4",
+                        "25-08-2022"
+                    )
+                ]
+                    )
+    ])
     ]
 );
 
@@ -71,6 +109,14 @@ $mpdf->SetHTMLHeader('
 </table>
 ');
 
+$mpdf->SetHTMLFooter('
+<table class="page-footer">
+    <tr>
+        <td><i>Neem contact op met de lokale HSE afdeling van ' . $inspection->get('department') . ' voor meer informatie</i></td>
+    </tr>
+</table>
+');
+
 $mpdf->WriteHTML('
 <div class="page-content">
     <table class="rapport-section">
@@ -87,6 +133,63 @@ $mpdf->WriteHTML('
         </tr>
     </table>
 ');
+
+
+
+
+foreach ($inspection->get('themes') as $theme) {
+
+    $mpdf->WriteHTML('
+    <div class="inspection-theme">
+    <p class="inspection-theme-header"><b>Thema: ' . $theme->get('themeName') . '</b></p>
+    ');
+
+
+    foreach ($theme->get('findings') as $finding) {
+        $mpdf->WriteHTML('
+        <div class="inspection-finding">
+
+        <p><b>Omschrijving</b><br>' . $finding->get('description') . '</p>
+        <p><b>Type</b><br>' . $finding->get('type') . '</p>
+        <p><b>Gesproken met</b><br>' . $finding->get('collegues') . ' - ' . $finding->get('department') . '</p>
+
+        ');
+
+// Afbeeldingen, max 2 per rij
+if(count($finding->get('images')) > 0) {
+    $mpdf->WriteHTML('<table class="rapport-afbeeldingen rapport-section">');
+    foreach (array_chunk($finding->get('images'), 2) as $row) {
+        $mpdf->WriteHTML('<tr>');
+        foreach ($row as $value) { 
+            $mpdf->WriteHTML('
+            <td><center>
+                <img class="rapport-afbeelding" src="' . $value . '" alt="">
+            </center></td>
+            ');
+        } 
+        $mpdf->WriteHTML('</tr>');
+    }
+    $mpdf->WriteHTML('</table>');
+}
+
+
+        $mpdf->WriteHTML('
+
+        <p><b>Reeds genomen acties</b><br>' . $finding->get('actionsTaken') . '</p>
+
+        <p>Vervolgacties</p>
+
+        </div>
+        
+
+        ');
+    }
+
+    $mpdf->WriteHTML('
+    </div>
+    ');
+}
+
 
 
 // // Afbeeldingen, max 2 per rij
