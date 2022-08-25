@@ -33,7 +33,8 @@ table {
   padding-bottom: 1.5rem;
 }
 
-.rapport-afbeeldingen {
+.rapport-afbeeldingen,
+.report-images {
   page-break-inside: auto;
   vertical-align: top;
 }

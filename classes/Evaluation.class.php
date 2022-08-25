@@ -51,17 +51,6 @@ class Evaluation extends Report {
     }
 
 
-    /**
-     * Set's the value for an property from the calling object.
-     *
-     * @param string $property The property to be set
-     * @param mixed The value to be set
-     */
-    public function set(string $property, mixed $value)
-    {
-        $this->{$property} = $value;
-    }
-
     
 }
 ?>

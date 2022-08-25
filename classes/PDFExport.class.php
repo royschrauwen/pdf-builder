@@ -54,6 +54,61 @@ private function exportPDF(string $destination = null) : void {
     $this->mpdf->Output($this->report->get('idReport').'.pdf', $destination);
 }
 
+/**
+ * Puts the images in the PDF, max 2 per row
+ *
+ * @param array $images The images to put in the PDF.
+ */
+private function displayImages(array $images) : void {
+    $this->mpdf->WriteHTML('    
+    <table class="report-images">
+    ');
+    foreach (array_chunk($images, 2) as $row) {
+        $this->mpdf->WriteHTML('<tr>');
+        foreach ($row as $value) { 
+            $this->mpdf->WriteHTML('
+            <td><center>
+                <img class="rapport-afbeelding" src="' . $value . '" alt="">
+            </center></td>
+            ');
+        } 
+        $this->mpdf->WriteHTML('</tr>');
+    }
+    $this->mpdf->WriteHTML('</table>');
+}
+
+
+private function displayFollowUpActions(array $followUpActions) : void {
+    $this->mpdf->WriteHTML('
+    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>
+    ');
+
+    for ($i=0; $i < count($followUpActions) ; $i++) { 
+        $this->mpdf->WriteHTML('
+        <table class="vervolgacties">
+            <tr>
+                <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+            </tr>
+            <tr class="vervolgactie-omschrijving">
+                <td colspan="5">' . $followUpActions[$i]->get('description') . '</td>
+            </tr>
+            <tr>
+                <td><b>Intern/extern</b></td>
+                <td><b>Voorgestelde actiehouder</b></td>
+                <td><b>Daadwerkelijke actiehouder</b></td>
+                <td><b>Plandatum</b></td>
+            </tr>
+            <tr>
+                <td>' . $followUpActions[$i]->get('actionType') . '</td>
+                <td>' . $followUpActions[$i]->get('reportedActionHolder') . '</td>
+                <td>' . $followUpActions[$i]->get('linkedActionHolder') . '</td>
+                <td>' . $followUpActions[$i]->get('plannedDate') . '</td>
+            </tr>
+        </table>
+        ');
+    }
+}
+
 
 /** Creates the PDF file using the Evaluation template */
 public function createInternalEvaluationPDF() : void {
@@ -131,19 +186,7 @@ public function createInternalEvaluationPDF() : void {
 
         // Images, max 2 per row
         if(count($this->report->get('aImages')) > 0) {
-            $this->mpdf->WriteHTML('<table class="rapport-afbeeldingen rapport-section">');
-            foreach (array_chunk($this->report->get('aImages'), 2) as $row) {
-                $this->mpdf->WriteHTML('<tr>');
-                foreach ($row as $value) { 
-                    $this->mpdf->WriteHTML('
-                    <td><center>
-                        <img class="rapport-afbeelding" src="' . $value . '" alt="">
-                    </center></td>
-                    ');
-                } 
-                $this->mpdf->WriteHTML('</tr>');
-            }
-            $this->mpdf->WriteHTML('</table>');
+            $this->displayImages($this->report->get('aImages'));
         }
 
 
@@ -179,35 +222,7 @@ public function createInternalEvaluationPDF() : void {
 
         // Follow Up Actions in case of a follow up
         if(count($this->report->get('aFollowUpActions')) > 0) {
-
-            $this->mpdf->WriteHTML('
-            <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>
-            ');
-
-            for ($i=0; $i < count($this->report->get('aFollowUpActions')) ; $i++) { 
-                $this->mpdf->WriteHTML('
-                <table class="vervolgacties">
-                    <tr>
-                        <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
-                    </tr>
-                    <tr class="vervolgactie-omschrijving">
-                        <td colspan="5">' . $this->report->get('aFollowUpActions')[$i]->get('description') . '</td>
-                    </tr>
-                    <tr>
-                        <td><b>Intern/extern</b></td>
-                        <td><b>Voorgestelde actiehouder</b></td>
-                        <td><b>Daadwerkelijke actiehouder</b></td>
-                        <td><b>Plandatum</b></td>
-                    </tr>
-                    <tr>
-                        <td>' . $this->report->get('aFollowUpActions')[$i]->get('actionType') . '</td>
-                        <td>' . $this->report->get('aFollowUpActions')[$i]->get('reportedActionHolder') . '</td>
-                        <td>' . $this->report->get('aFollowUpActions')[$i]->get('linkedActionHolder') . '</td>
-                        <td>' . $this->report->get('aFollowUpActions')[$i]->get('plannedDate') . '</td>
-                    </tr>
-                </table>
-                ');
-            }
+            $this->displayFollowUpActions($this->report->get('aFollowUpActions'));
         }
 
         $this->mpdf->WriteHTML('
@@ -412,27 +427,9 @@ public function createInspectionPDF() : void {
                 </div>
                 ');
         
-        // Afbeeldingen, max 2 per rij
+        // Images, max 2 per row
         if(count($finding->get('aImages')) > 0) {
-            $this->mpdf->WriteHTML('
-            <div class="inspection-images">
-        
-            <p style="margin-left:1rem"><b>Afbeeldingen</b></p>
-            
-            <table>
-            ');
-            foreach (array_chunk($finding->get('aImages'), 2) as $row) {
-                $this->mpdf->WriteHTML('<tr>');
-                foreach ($row as $value) { 
-                    $this->mpdf->WriteHTML('
-                    <td><center>
-                        <img class="rapport-afbeelding" src="' . $value . '" alt="">
-                    </center></td>
-                    ');
-                } 
-                $this->mpdf->WriteHTML('</tr>');
-            }
-            $this->mpdf->WriteHTML('</table></div>');
+            $this->displayImages($finding->get('aImages'));
         }
         
         
@@ -446,53 +443,14 @@ public function createInspectionPDF() : void {
         
         // Vervolgacties indien aanwezig
         if(count($finding->get('aFollowUpActions')) > 0) {
-        
-            $this->mpdf->WriteHTML('
-            <p style="margin-left:1rem"><b>Vervolgacties</b></p>
-            ');
-        
-            for ($i=0; $i < count($finding->get('aFollowUpActions')) ; $i++) { 
-                $this->mpdf->WriteHTML('
-                <table class="vervolgacties">
-                    <tr>
-                        <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
-                    </tr>
-                    <tr class="vervolgactie-omschrijving">
-                        <td colspan="5">' . $finding->get('aFollowUpActions')[$i]->get('description') . '</td>
-                    </tr>
-                    <tr>
-                        <td><b>Intern/extern</b></td>
-                        <td><b>Voorgestelde actiehouder</b></td>
-                        <td><b>Daadwerkelijke actiehouder</b></td>
-                        <td><b>Plandatum</b></td>
-                    </tr>
-                    <tr>
-                        <td>' . $finding->get('aFollowUpActions')[$i]->get('actionType') . '</td>
-                        <td>' . $finding->get('aFollowUpActions')[$i]->get('reportedActionHolder') . '</td>
-                        <td>' . $finding->get('aFollowUpActions')[$i]->get('linkedActionHolder') . '</td>
-                        <td>' . $finding->get('aFollowUpActions')[$i]->get('plannedDate') . '</td>
-                    </tr>
-                </table>
-                ');
-            }
+            $this->displayFollowUpActions($finding->get('aFollowUpActions'));
         }
         
-        
-        
-        
-        
-        
-                $this->mpdf->WriteHTML('
-        
-                </div>
-                
-        
-                ');
+
+                $this->mpdf->WriteHTML('</div></div>');
             }
         
-            $this->mpdf->WriteHTML('
-            </div>
-            ');
+
         }
 
         $this->exportPDF("I");    

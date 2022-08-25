@@ -2,8 +2,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// I don't know how autoloaders work yet...
+// I don't know how autoloaders work yet... '^_^
 require_once __DIR__ . '/classes/Report.class.php';
+require_once __DIR__ . '/classes/Evaluation.class.php';
 require_once __DIR__ . '/classes/InternalEvaluation.class.php';
 require_once __DIR__ . '/classes/ExternalEvaluation.class.php';
 require_once __DIR__ . '/classes/Inspection.class.php';
@@ -23,13 +24,8 @@ include_once 'includes/dummyDataExternalEvaluation.inc.php';
 include_once 'includes/dummyDataInspection.inc.php';
 
 
-// This method is used to generate the PDF file for Internal Evaluations
 // (new PDFExport($oInternalEvaluation))->createInternalEvaluationPDF();
-
-// This method is used to generate the PDF file for External Evaluations
 // (new PDFExport($oExternalEvaluation))->createExternalEvaluationPDF();
-
-// This method is used to generate the PDF file for External Evaluations
 (new PDFExport($oInspection))->createInspectionPDF();
 
 ?>
