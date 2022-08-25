@@ -24,8 +24,11 @@ include_once 'includes/dummyDataExternalEvaluation.inc.php';
 include_once 'includes/dummyDataInspection.inc.php';
 
 
-// (new PDFExport($oInternalEvaluation))->createInternalEvaluationPDF();
-// (new PDFExport($oExternalEvaluation))->createExternalEvaluationPDF();
-(new PDFExport($oInspection))->createInspectionPDF();
+
+// All three below are used for a different report structure
+// (new PDFExport($oInternalEvaluation))->create();
+// (new PDFExport($oExternalEvaluation))->create();
+(new PDFExport($oInspection))->create();
+
 
 ?>

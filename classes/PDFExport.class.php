@@ -9,7 +9,7 @@
 class PDFExport {
 
 private $mpdf;
-private $defaultDestination = "D";
+private $defaultDestination = "I";
 
 public function __construct(private Report $report) {
     // Create PDF
@@ -22,6 +22,28 @@ public function __construct(private Report $report) {
     $stylesheet = file_get_contents('style\report.css');
     $this->mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
 }
+
+
+public function create() {
+    // echo the class type of the report
+    $reportType = get_class($this->report);
+
+    switch ($reportType) {
+        case "InternalEvaluation":
+            $this->createInternalEvaluationPDF();
+            break;
+        case "ExternalEvaluation":
+            $this->createExternalEvaluationPDF();
+            break;
+        case "Inspection":
+            $this->createInspectionPDF();
+            break;
+        default:
+            echo "Unknown Report Type. No PDF has been created";
+            break;
+        }
+}
+
 
 
 /** Sets the metadata for the PDF. */
@@ -237,7 +259,7 @@ public function createInternalEvaluationPDF() : void {
         </div>
         ');
 
-        $this->exportPDF("I");    
+        $this->exportPDF();    
 
     } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
@@ -355,7 +377,7 @@ public function createExternalEvaluationPDF() : void {
             </div>
             ');
 
-        $this->exportPDF("I");    
+        $this->exportPDF();    
 
     } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
@@ -453,7 +475,7 @@ public function createInspectionPDF() : void {
 
         }
 
-        $this->exportPDF("I");    
+        $this->exportPDF();    
 
     } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
