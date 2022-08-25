@@ -2,6 +2,8 @@
 /**
  * EQUANS PDF Exporter
  *
+ * @param Report $report
+ * 
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
