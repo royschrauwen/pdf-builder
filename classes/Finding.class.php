@@ -13,13 +13,13 @@
 class Finding {
 
     function __construct(
-    private string $description,
-    private string $type,
-    private string $collegues,
-    private string $department,
-    private array $images,
-    private string $actionsTaken,
-    private array $followUpActions,
+    private string $vDescription,
+    private string $vType,
+    private string $vCollegues,
+    private string $vDepartment,
+    private array $aImages,
+    private string $vActionsTaken,
+    private array $aFollowUpActions,
     ) {}
 
             /**
@@ -32,17 +32,4 @@ class Finding {
     {
         return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : false;
     }
-
-
-    /**
-     * Set's the value for an property from the calling object.
-     *
-     * @param string $property The property to be set
-     * @param mixed The value to be set
-     */
-    public function set(string $property, mixed $value)
-    {
-        $this->{$property} = $value;
-    }
-
 }

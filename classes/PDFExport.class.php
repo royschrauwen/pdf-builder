@@ -56,7 +56,7 @@ private function exportPDF(string $destination = null) : void {
 
 
 /** Creates the PDF file using the Evaluation template */
-public function createEvaluationPDF() : void {
+public function createInternalEvaluationPDF() : void {
     try {
 
         // Create header
@@ -221,6 +221,279 @@ public function createEvaluationPDF() : void {
             </table>
         </div>
         ');
+
+        $this->exportPDF("I");    
+
+    } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
+        // Process the exception, log, print etc.
+        echo $e->getMessage();
+    }
+}
+
+/** Creates the PDF file using the Evaluation template */
+public function createExternalEvaluationPDF() : void {
+    try {
+
+        // Create header
+        $this->mpdf->SetHTMLHeader('
+            <table class="page-header">
+                <tr>
+                    <td><img class="header-logo" src="images/logo.jpg" alt=""></td>
+                    <td><span class="werktitel">' . $this->report->get('vWorkingTitle') . '</span></td>
+                    <td><b>Datum en tijd</b><br>' . $this->report->get('dtDateTime') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="1"><b>Registratienr</b> ' . $this->report->get('idReport') . '</td>
+                    <td colspan="2"><b>Meldingstype</b> ' . $this->report->get('vType') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="1"><b>EQUANS bedrijf</b> ' . $this->report->get('vDepartment') . '</td>
+                    <td colspan="2"><b>Afdrukdatum</b> {DATE j-m-Y}</td>
+
+                </tr>
+            </table>
+            ');
+
+
+
+
+            $this->mpdf->WriteHTML('
+            <div class="page-content">
+            <table class="rapport-section">
+                <tr>
+                    <td colspan="3"><b>Melder</b> ' . $this->report->get('vReportedByName') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Referentie</b> ' . $this->report->get('vReference') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <b>Omschrijving van de constatering</b><br>' . nl2br($this->report->get('vDescription')) . '
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Norm / schema / vakgebied</b><br>' . $this->report->get('vNorm') . '</td>
+                    <td colspan="1"><b>Normparagraaf</b><br>' . $this->report->get('vNormParagraph') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Klantnaam</b> ' . $this->report->get('vClientName') . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Oorzaakanalyse</b><br>
+                    ' . nl2br($this->report->get('vCauseAnalysis')) . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Omvanganalyse van de constatering</b><br>
+                    ' . nl2br($this->report->get('vSizeAnalysis')) . '</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Verbetervoorstel</b><br>
+                    ' . nl2br($this->report->get('vHowShouldBeSolved')) . '</td>
+                </tr>
+            </table>
+            ');
+            
+            
+            // Vervolgacties indien aanwezig
+            if(count($this->report->get('aFollowUpActions')) > 0) {
+            
+                $this->mpdf->WriteHTML('
+                <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>
+                ');
+            
+                for ($i=0; $i < count($this->report->get('aFollowUpActions')) ; $i++) { 
+                    $this->mpdf->WriteHTML('
+                    <table class="vervolgacties">
+                        <tr>
+                            <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+                        </tr>
+                        <tr class="vervolgactie-omschrijving">
+                            <td colspan="5">' . $this->report->get('aFollowUpActions')[$i]['actie'] . '</td>
+                        </tr>
+                        <tr>
+                            <td><b>Intern/extern</b></td>
+                            <td><b>Voorgestelde actiehouder</b></td>
+                            <td><b>Daadwerkelijke actiehouder</b></td>
+                            <td><b>Plandatum</b></td>
+                        </tr>
+                        <tr>
+                            <td>' . $this->report->get('aFollowUpActions')[$i]['internExtern'] . '</td>
+                            <td>' . $this->report->get('aFollowUpActions')[$i]['voorgesteldeActiehouder'] . '</td>
+                            <td>' . $this->report->get('aFollowUpActions')[$i]['daadwerkelijkeActiehouder'] . '</td>
+                            <td>' . $this->report->get('aFollowUpActions')[$i]['plandatum'] . '</td>
+                        </tr>
+                    </table>
+                    ');
+                }
+            
+            }
+            
+            $this->mpdf->WriteHTML('
+                <table class="rapport-section">
+                    <tr>
+                        <td><b>Doeltreffendheid van de actie</b></td>
+                    </tr>
+                    <tr>
+                        <td>' . $this->report->get('vEffectiveness') . '</td>
+                    </tr>
+                </table>
+            </div>
+            ');
+
+        $this->exportPDF("I");    
+
+    } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
+        // Process the exception, log, print etc.
+        echo $e->getMessage();
+    }
+}
+
+/** Creates the PDF file using the Evaluation template */
+public function createInspectionPDF() : void {
+    try {
+
+        // Create header
+        $this->mpdf->SetHTMLHeader('
+            <table class="page-header">
+                <tr>
+                    <td><img class="header-logo" src="images/logo.jpg" alt=""></td>
+                    <td><b>Meldingstype</b><br>' . $this->report->get('vType') . '</td>
+                    <td><b>Datum</b><br>' . $this->report->get('vDate') . '</td>
+                </tr>
+                <tr>
+                    <td><b>Registratienr</b><br>' . $this->report->get('idReport') . '</td>
+                    <td colspan="2"><b>EQUANS bedrijf</b><br>' . $this->report->get('vDepartment') . '</td>
+                </tr>
+            </table>
+            ');
+
+        $this->mpdf->SetHTMLFooter('
+        <table class="page-footer">
+            <tr>
+                <td><i>Neem contact op met de lokale HSE afdeling van ' . $this->report->get('vDepartment') . ' voor meer informatie</i></td>
+            </tr>
+        </table>
+        ');
+
+
+        $this->mpdf->WriteHTML('
+        <div class="page-content">
+        <table class="rapport-section">
+            <tr>
+                <td><b>Melder</b><br>' . $this->report->get('vReportedByName') . '</td>
+                <td><b>Tel</b><br>' . $this->report->get('vReportedByPhone') . '</td>
+                <td><b>Meegelopen</b><br>' . $this->report->get('vPresentColleagues') . '</td>
+            </tr>
+    
+            <tr>
+                <td><b>Projectnaam en -nummer</b><br>' . $this->report->get('vProjectNameNumber') . '</td>
+                <td><b>Klantnaam</b><br>' . $this->report->get('vClientName') . '</td>
+                <td><b>Locatiebeschrijving</b><br>' . $this->report->get('vLocationDescription') . '</td>
+            </tr>
+        </table>
+        ');
+
+
+        foreach ($this->report->get('aThemes') as $theme) {
+
+            $this->mpdf->WriteHTML('
+            <div class="inspection-theme">
+            <p class="inspection-theme-header"><b>Thema: ' . $theme->get('vThemeName') . '</b></p>
+            ');
+        
+        
+            foreach ($theme->get('aFindings') as $finding) {
+                $this->mpdf->WriteHTML('
+                <div class="inspection-finding">
+        
+                <p><b>Omschrijving</b><br>' . $finding->get('vDescription') . '</p>
+                <p><b>Type</b><br>' . $finding->get('vType') . '</p>
+                <p><b>Gesproken met</b><br>' . $finding->get('vCollegues') . ' - ' . $finding->get('vDepartment') . '</p>
+                </div>
+                ');
+        
+        // Afbeeldingen, max 2 per rij
+        if(count($finding->get('aImages')) > 0) {
+            $this->mpdf->WriteHTML('
+            <div class="inspection-images">
+        
+            <p style="margin-left:1rem"><b>Afbeeldingen</b></p>
+            
+            <table>
+            ');
+            foreach (array_chunk($finding->get('aImages'), 2) as $row) {
+                $this->mpdf->WriteHTML('<tr>');
+                foreach ($row as $value) { 
+                    $this->mpdf->WriteHTML('
+                    <td><center>
+                        <img class="rapport-afbeelding" src="' . $value . '" alt="">
+                    </center></td>
+                    ');
+                } 
+                $this->mpdf->WriteHTML('</tr>');
+            }
+            $this->mpdf->WriteHTML('</table></div>');
+        }
+        
+        
+                $this->mpdf->WriteHTML('
+                <div class="inspection-finding">
+        
+                <p><b>Reeds genomen acties</b><br>' . $finding->get('vActionsTaken') . '</p>');
+        
+        
+        
+        
+        // Vervolgacties indien aanwezig
+        if(count($finding->get('aFollowUpActions')) > 0) {
+        
+            $this->mpdf->WriteHTML('
+            <p style="margin-left:1rem"><b>Vervolgacties</b></p>
+            ');
+        
+            for ($i=0; $i < count($finding->get('aFollowUpActions')) ; $i++) { 
+                $this->mpdf->WriteHTML('
+                <table class="vervolgacties">
+                    <tr>
+                        <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+                    </tr>
+                    <tr class="vervolgactie-omschrijving">
+                        <td colspan="5">' . $finding->get('aFollowUpActions')[$i]->get('description') . '</td>
+                    </tr>
+                    <tr>
+                        <td><b>Intern/extern</b></td>
+                        <td><b>Voorgestelde actiehouder</b></td>
+                        <td><b>Daadwerkelijke actiehouder</b></td>
+                        <td><b>Plandatum</b></td>
+                    </tr>
+                    <tr>
+                        <td>' . $finding->get('aFollowUpActions')[$i]->get('actionType') . '</td>
+                        <td>' . $finding->get('aFollowUpActions')[$i]->get('reportedActionHolder') . '</td>
+                        <td>' . $finding->get('aFollowUpActions')[$i]->get('linkedActionHolder') . '</td>
+                        <td>' . $finding->get('aFollowUpActions')[$i]->get('plannedDate') . '</td>
+                    </tr>
+                </table>
+                ');
+            }
+        }
+        
+        
+        
+        
+        
+        
+                $this->mpdf->WriteHTML('
+        
+                </div>
+                
+        
+                ');
+            }
+        
+            $this->mpdf->WriteHTML('
+            </div>
+            ');
+        }
 
         $this->exportPDF("I");    
 

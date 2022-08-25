@@ -1,21 +1,32 @@
 <?php
 /**
- * EQUANS PDF Inspection PDF Theme
+ * EQUANS PDF Inspection PDF
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
  */ 
-class Theme {
-
+class Inspection extends Report {
+    
     function __construct(
-        private string $vThemeName,
-        private array $aFindings
-    )
-    {}
+    private string $idReport,
+    private string $vType,
+    private string $vDate,
+    private string $vDepartment,
 
+    private string $vReportedByName,
+    private string $vReportedByPhone,
+    private string $vPresentColleagues,
 
-        /**
+    private string $vProjectNameNumber,
+    private string $vClientName,
+    private string $vLocationDescription,
+
+    private array $aThemes,
+
+    ) {}
+
+    /**
      * Get's the value of an object's property.
      *
      * @param string $property The property to be retreived
@@ -27,16 +38,7 @@ class Theme {
     }
 
 
-    /**
-     * Set's the value for an property from the calling object.
-     *
-     * @param string $property The property to be set
-     * @param mixed The value to be set
-     */
-    public function set(string $property, mixed $value)
-    {
-        $this->{$property} = $value;
-    }
 
-
+    
 }
+?>
