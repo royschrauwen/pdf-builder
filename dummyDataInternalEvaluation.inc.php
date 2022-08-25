@@ -1,7 +1,7 @@
 <?php
 
 // Voorbeeldrapportage Intern
-$report = new Report(
+$report = new InternalEvaluation(
     "Testrapportage EQUANS",
     "1234567890",
     "Verbetervoorstel",
