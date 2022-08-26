@@ -120,7 +120,6 @@ class Inspection extends Report {
         
         // // Vervolgacties indien aanwezig
         if(count($finding->get('aFollowUpActions')) > 0) {
-            // $this->displayFollowUpActions($finding->get('aFollowUpActions'));
 
             $vContentHTML .= '
             <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
