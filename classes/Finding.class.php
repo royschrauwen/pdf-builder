@@ -9,15 +9,31 @@
  */ 
 class Finding {
 
+    private string $vDescription;
+    private string $vType;
+    private string $vCollegues;
+    private string $vDepartment;
+    private array  $aImages;
+    private string $vActionsTaken;
+    private array  $aFollowUpActions;
+
     function __construct(
-    private string $vDescription,
-    private string $vType,
-    private string $vCollegues,
-    private string $vDepartment,
-    private array $aImages,
-    private string $vActionsTaken,
-    private array $aFollowUpActions,
-    ) {}
+        string $vDescription,
+        string $vType,
+        string $vCollegues,
+        string $vDepartment,
+        array  $aImages,
+        string $vActionsTaken,
+        array  $aFollowUpActions,
+    ) {
+        $this->vDescription = $vDescription;
+        $this->vType = $vType;
+        $this->vCollegues = $vCollegues;
+        $this->vDepartment = $vDepartment;
+        $this->aImages = $aImages;
+        $this->vActionsTaken = $vActionsTaken;
+        $this->aFollowUpActions = $aFollowUpActions;
+    }
 
             /**
      * Get's the value of an object's property.

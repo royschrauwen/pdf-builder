@@ -7,20 +7,44 @@
  * @since      Class available since Release 0.1.0
  */ 
 class Inspection extends Report {
-    
+
+    protected ?string $idReport;
+    protected ?string $vType;
+    protected ?string $vDate;
+    protected ?string $vDepartment;
+    protected ?string $vReportedByName;
+    protected ?string $vReportedByPhone;
+    protected ?string $vPresentColleagues;
+    protected ?string $vProjectNameNumber;
+    protected ?string $vClientName;
+    protected ?string $vLocationDescription;
+    protected ?array  $aThemes;
+
     function __construct(
-        protected ?string $idReport,
-        protected ?string $vType,
-        protected ?string $vDate,
-        protected ?string $vDepartment,
-        protected ?string $vReportedByName,
-        protected ?string $vReportedByPhone,
-        protected ?string $vPresentColleagues,
-        protected ?string $vProjectNameNumber,
-        protected ?string $vClientName,
-        protected ?string $vLocationDescription,
-        protected ?array $aThemes,
-    ) {}
+        string $idReport,
+        string $vType,
+        string $vDate,
+        string $vDepartment,
+        string $vReportedByName,
+        string $vReportedByPhone,
+        string $vPresentColleagues,
+        string $vProjectNameNumber,
+        string $vClientName,
+        string $vLocationDescription,
+        array  $aThemes,
+    ) {
+        $this->idReport = $idReport;
+        $this->vType = $vType;
+        $this->vDate = $vDate;
+        $this->vDepartment = $vDepartment;
+        $this->vReportedByName = $vReportedByName;
+        $this->vReportedByPhone = $vReportedByPhone;
+        $this->vPresentColleagues = $vPresentColleagues;
+        $this->vProjectNameNumber = $vProjectNameNumber;
+        $this->vClientName = $vClientName;
+        $this->vLocationDescription = $vLocationDescription;
+        $this->aThemes = $aThemes;
+    }
 
 
 

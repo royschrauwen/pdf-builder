@@ -10,25 +10,61 @@
  */ 
 class ExternalEvaluation extends Evaluation {
     
+    protected ?string $vWorkingTitle;
+    protected ?string $idReport;
+    protected ?string $vType;
+    protected ?string $dtDateTime;
+    protected ?string $vDepartment;
+    protected ?string $vReportedByName;
+    protected ?string $vCause;
+    protected ?string $vReference;
+    protected ?string $vDescription;
+    protected ?string $vNorm;
+    protected ?string $vNormParagraph;
+    protected ?string $vClientName;
+    protected ?string $vCauseAnalysis;
+    protected ?string $vSizeAnalysis;
+    protected ?string $vHowShouldBeSolved;
+    protected ?array  $aFollowUpActions;
+    protected ?string $vEffectiveness;
+
     function __construct (
-        protected ?string $vWorkingTitle,
-        protected ?string $idReport,
-        protected ?string $vType,
-        protected ?string $dtDateTime,
-        protected ?string $vDepartment,
-        protected ?string $vReportedByName,
-        protected ?string $vCause,
-        protected ?string $vReference,
-        protected ?string $vDescription,
-        protected ?string $vNorm,
-        protected ?string $vNormParagraph,
-        protected ?string $vClientName,
-        protected ?string $vCauseAnalysis,
-        protected ?string $vSizeAnalysis,
-        protected ?string $vHowShouldBeSolved,
-        protected ?array $aFollowUpActions,
-        protected ?string $vEffectiveness
-    ) {}
+        string $vWorkingTitle,
+        string $idReport,
+        string $vType,
+        string $dtDateTime,
+        string $vDepartment,
+        string $vReportedByName,
+        string $vCause,
+        string $vReference,
+        string $vDescription,
+        string $vNorm,
+        string $vNormParagraph,
+        string $vClientName,
+        string $vCauseAnalysis,
+        string $vSizeAnalysis,
+        string $vHowShouldBeSolved,
+        array  $aFollowUpActions,
+        string $vEffectiveness,
+    ) {
+        $this->vWorkingTitle = $vWorkingTitle;
+        $this->idReport = $idReport;
+        $this->vType = $vType;
+        $this->dtDateTime = $dtDateTime;
+        $this->vDepartment = $vDepartment;
+        $this->vReportedByName = $vReportedByName;
+        $this->vCause = $vCause;
+        $this->vReference = $vReference;
+        $this->vDescription = $vDescription;
+        $this->vNorm = $vNorm;
+        $this->vNormParagraph = $vNormParagraph;
+        $this->vClientName = $vClientName;
+        $this->vCauseAnalysis = $vCauseAnalysis;
+        $this->vSizeAnalysis = $vSizeAnalysis;
+        $this->vHowShouldBeSolved = $vHowShouldBeSolved;
+        $this->aFollowUpActions = $aFollowUpActions;
+        $this->vEffectiveness = $vEffectiveness;
+    }
 
     /** Creates the HTML for the Header of the External Evaluation template */
     public function getHeaderHTML() : string {

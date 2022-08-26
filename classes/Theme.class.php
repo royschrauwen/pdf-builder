@@ -8,11 +8,19 @@
  */ 
 class Theme {
 
+    private string $vThemeName;
+    private array  $aFindings;
+
     function __construct(
-        private string $vThemeName,
-        private array $aFindings
+        string $vThemeName,
+        array $aFindings,
     )
-    {}
+    {
+
+        $this->vThemeName = $vThemeName;
+        $this->aFindings = $aFindings;
+
+    }
 
 
         /**

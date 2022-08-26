@@ -9,13 +9,25 @@
  */ 
 class FollowUpAction {
     
+    protected string $vDescription;
+    protected string $vActionType;
+    protected string $vReportedActionHolder;
+    protected string $vLinkedActionHolder;
+    protected string $vPlannedDate;
+
     function __construct(
-    protected string $vDescription,
-    protected string $vActionType,
-    protected string $vReportedActionHolder,
-    protected string $vLinkedActionHolder,
-    protected string $vPlannedDate
-    ) {} 
+        string $vDescription,
+        string $vActionType,
+        string $vReportedActionHolder,
+        string $vLinkedActionHolder,
+        string $vPlannedDate
+    ) {
+        $this->vDescription = $vDescription;
+        $this->vActionType = $vActionType;
+        $this->vReportedActionHolder = $vReportedActionHolder;
+        $this->vLinkedActionHolder = $vLinkedActionHolder;
+        $this->vPlannedDate = $vPlannedDate;
+    } 
 
 
     /**
