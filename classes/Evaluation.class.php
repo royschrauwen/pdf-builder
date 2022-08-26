@@ -1,6 +1,6 @@
 <?php
 /**
- * EQUANS PDF Reports
+ * EQUANS PDF Evaluation
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
@@ -9,47 +9,35 @@
 class Evaluation extends Report {
     
     function __construct(
-    private string $werktitel,
-    private string $registratienummer,
-    private string $meldingstype,
-    private string $datumTijd,
-    private string $equansBedrijf,
-    private string $melder,
-    private string $telefoonnummer,
-    private string $emailadres,
-    private string $aanleiding,
-    private string $referentie,
-    private string $klantintern,
-    private string $omschrijving,
-    private string $normSchemaVakgebied,
-    private string $normparagraaf,
-    private string $processen,
-    private string $niveauImpact,
-    private string $segment,
-    private string $projectnaamNummer,
-    private string $klantnaam,
-    private array $afbeeldingen,
-    private string $omschrijvingDirecteAanleiding,
-    private string $oorzaakanalyse,
-    private string $omvanganalyse,
-    private string $verbetervoorstel,
-    private string $reedsGenomenActies,
-    private string $plandatum,
-    private array $vervolgacties,
-    private string $doeltreffendheid
+        protected ?string $vWorkingTitle,
+        protected ?string $idReport,
+        protected ?string $vType,
+        protected ?string $dtDateTime,
+        protected ?string $vDepartment,
+        protected ?string $vReportedByName,
+        protected ?string $vReportedByPhone,
+        protected ?string $vReportedByEmail,
+        protected ?string $vCause,
+        protected ?string $vReference,
+        protected ?string $vCustomerInternal,
+        protected ?string $vDescription,
+        protected ?string $vNorm,
+        protected ?string $vNormParagraph,
+        protected ?string $vProcess,
+        protected ?string $vImpactLevel,
+        protected ?string $vSegment,
+        protected ?string $vProjectNameNumber,
+        protected ?string $vClientName,
+        protected ?array $aImages,
+        protected ?string $vCauseDescription,
+        protected ?string $vCauseAnalysis,
+        protected ?string $vSizeAnalysis,
+        protected ?string $vHowShouldBeSolved,
+        protected ?string $vActionsTaken,
+        protected ?string $vPlanningDate,
+        protected ?array $aFollowUpActions,
+        protected ?string $vEffectiveness
     ) {}
-
-    /**
-     * Get's the value of an object's property.
-     *
-     * @param string $property The property to be retreived
-     * @return mixed|false The value of the requested property | The property does not exist on this object
-     */
-    public function get(string $property) : mixed
-    {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : false;
-    }
-
 
     
 }

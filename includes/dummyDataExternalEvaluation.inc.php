@@ -25,20 +25,20 @@ $oExternalEvaluation = new ExternalEvaluation(
     "Roy maakt een PHP document dat gebruikt maakt van een library om een pagina naar PDF te kunnen omzetten",
 
     [
-        [
-        "actie" => "Styling voorleggen aan Renko / Lorentz",
-        "internExtern" => "intern",
-        "voorgesteldeActiehouder" => "Renko",
-        "daadwerkelijkeActiehouder" => "Roy",
-        "plandatum" => "23 aug 2022"
-        ],
-        [
-        "actie" => "Andere pagina's maken",
-        "internExtern" => "intern",
-        "voorgesteldeActiehouder" => "Roy",
-        "daadwerkelijkeActiehouder" => "ook Roy",
-        "plandatum" => "23 aug 2022"
-        ]
+        new FollowUpAction(
+            "Styling voorleggen aan Renko / Lorentz",
+            "intern",
+            "Renko",
+            "Roy",
+            "23 aug 2022"
+        ),
+        new FollowUpAction(
+            "Andere pagina's maken",
+            "intern",
+            "Roy",
+            "Roy",
+            "23 aug 2022"
+        )
     ],
     "Doeltreffendheid is hoog"
 );

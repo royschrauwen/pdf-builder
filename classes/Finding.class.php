@@ -1,8 +1,5 @@
 <?php
 
-// require_once __DIR__ . '/Equans.class.php';
-
-
 /**
  * EQUANS PDF Inspection PDF Findings
  *

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EQUANS PDF Reports
+ * EQUANS PDF Report Follow Up Actions
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
@@ -10,36 +10,46 @@
 class FollowUpAction {
     
     function __construct(
-    private string $description,
-    private string $actionType,
-    private string $reportedActionHolder,
-    private string $linkedActionHolder,
-    private string $plannedDate
+    protected string $vDescription,
+    protected string $vActionType,
+    protected string $vReportedActionHolder,
+    protected string $vLinkedActionHolder,
+    protected string $vPlannedDate
     ) {} 
 
 
-            /**
-     * Get's the value of an object's property.
-     *
-     * @param string $property The property to be retreived
-     * @return mixed|false The value of the requested property | The property does not exist on this object
-     */
-    public function get(string $property) : mixed
-    {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : false;
-    }
-
-
     /**
-     * Set's the value for an property from the calling object.
+     * Generates the HTML for a single FOllow Up Action
      *
-     * @param string $property The property to be set
-     * @param mixed The value to be set
+     * @param int $i The index of the Follow Up Action
+     * @return string $vSingleActionHTML The Follow Up Action, formatted in HTML
      */
-    public function set(string $property, mixed $value)
-    {
-        $this->{$property} = $value;
-    }
+        public function getSingleActionHTML(int $i) : string {
+            $vSingleActionHTML = '
+
+            <table class="vervolgacties">
+                <tr>
+                    <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+                </tr>
+                <tr class="vervolgactie-omschrijving">
+                    <td colspan="5">' . $this->vDescription . '</td>
+                </tr>
+                <tr>
+                    <td><b>Intern/extern</b></td>
+                    <td><b>Voorgestelde actiehouder</b></td>
+                    <td><b>Daadwerkelijke actiehouder</b></td>
+                    <td><b>Plandatum</b></td>
+                </tr>
+                <tr>
+                    <td>' . $this->vActionType . '</td>
+                    <td>' . $this->vReportedActionHolder . '</td>
+                    <td>' . $this->vLinkedActionHolder . '</td>
+                    <td>' . $this->vPlannedDate . '</td>
+                </tr>
+            </table>
+            ';
+
+            return $vSingleActionHTML;
+        }
 
 }
-?>

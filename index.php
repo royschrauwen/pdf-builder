@@ -23,12 +23,12 @@ include_once 'includes/dummyDataExternalEvaluation.inc.php';
 //$oInspection data comes from dummyDataInternalEvaluation.inc.php
 include_once 'includes/dummyDataInspection.inc.php';
 
-
+// var_dump($oInternalEvaluation);
 
 // All three below are used for a different report structure
-(new PDFExport($oInternalEvaluation))->create();
+// (new PDFExport($oInternalEvaluation))->create();
 // (new PDFExport($oExternalEvaluation))->create();
-// (new PDFExport($oInspection))->create();
+(new PDFExport($oInspection))->create();
 
 
 ?>

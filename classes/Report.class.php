@@ -9,34 +9,34 @@
 class Report {
     
     function __construct (
-        private string $vWorkingTitle,
-        private string $idReport,
-        private string $vType,
-        private string $dtDateTime,
-        private string $vDepartment,
-        private string $vReportedByName,
-        private string $vReportedByPhone,
-        private string $vReportedByEmail,
-        private string $vCause,
-        private string $vReference,
-        private string $vCustomerInternal,
-        private string $vDescription,
-        private string $vNorm,
-        private string $vNormParagraph,
-        private string $vProcess,
-        private string $vImpactLevel,
-        private string $vSegment,
-        private string $vProjectNameNumber,
-        private string $vClientName,
-        private array $aImages,
-        private string $vCauseDescription,
-        private string $vCauseAnalysis,
-        private string $vSizeAnalysis,
-        private string $vHowShouldBeSolved,
-        private string $vActionsTaken,
-        private string $vPlanningDate,
-        private array $aFollowUpActions,
-        private string $vEffectiveness
+        protected ?string $vWorkingTitle,
+        protected ?string $idReport,
+        protected ?string $vType,
+        protected ?string $dtDateTime,
+        protected ?string $vDepartment,
+        protected ?string $vReportedByName,
+        protected ?string $vReportedByPhone,
+        protected ?string $vReportedByEmail,
+        protected ?string $vCause,
+        protected ?string $vReference,
+        protected ?string $vCustomerInternal,
+        protected ?string $vDescription,
+        protected ?string $vNorm,
+        protected ?string $vNormParagraph,
+        protected ?string $vProcess,
+        protected ?string $vImpactLevel,
+        protected ?string $vSegment,
+        protected ?string $vProjectNameNumber,
+        protected ?string $vClientName,
+        protected ?array $aImages,
+        protected ?string $vCauseDescription,
+        protected ?string $vCauseAnalysis,
+        protected ?string $vSizeAnalysis,
+        protected ?string $vHowShouldBeSolved,
+        protected ?string $vActionsTaken,
+        protected ?string $vPlanningDate,
+        protected ?array $aFollowUpActions,
+        protected ?string $vEffectiveness
     ) {}
 
     /**
@@ -61,5 +61,49 @@ class Report {
     {
         $this->{$property} = $value;
     }
+
+
     
+
+    /**
+     * Puts the images in the PDF, max 2 per row
+     *
+     * @return string $imageHTML The images to put in the PDF, formatted in HTML
+     */
+    public function getImageHTML() : string {
+
+        $vImageHTML = '<table class="report-images">';
+
+        foreach (array_chunk($this->aImages, 2) as $row) {
+            $vImageHTML .= '<tr>';
+            foreach ($row as $value) { 
+                $vImageHTML .= 
+                '<td><center>
+                    <img class="rapport-afbeelding" src="' . $value . '" alt="">
+                </center></td>';
+            } 
+            $vImageHTML .= '</tr>';
+        }
+
+        $vImageHTML .= '</table>';
+        return $vImageHTML;
+    }
+
+    /**
+     * Generates the HTML for Follow Up Actions
+     *
+     * @return string $imageHTML The Follow Up Actions, formatted in HTML
+     */
+    public function getFollowUpActionsHTML() : string {
+
+        $vFollowUpActionHTML = '
+        <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
+
+        for ($i=0; $i < count($this->aFollowUpActions) ; $i++) { 
+            $vFollowUpActionHTML .= $this->aFollowUpActions[$i]->getSingleActionHTML($i);
+        }
+        
+        return $vFollowUpActionHTML;
+    }
+
 }
