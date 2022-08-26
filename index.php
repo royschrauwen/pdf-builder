@@ -1,5 +1,6 @@
 <?php
 
+// Required for mPDF / Composer
 require_once __DIR__ . '/vendor/autoload.php';
 
 // I don't know how autoloaders work yet... '^_^
@@ -14,20 +15,17 @@ require_once __DIR__ . '/classes/Finding.class.php';
 require_once __DIR__ . '/classes/PDFExport.class.php';
 
 
-//$oInternalEvaluation data comes from dummyDataInternalEvaluation.inc.php
+// Dummy data for testing
 include_once 'includes/dummyDataInternalEvaluation.inc.php';
-
-//$oExternalEvaluation data comes from dummyDataInternalEvaluation.inc.php
 include_once 'includes/dummyDataExternalEvaluation.inc.php';
-
-//$oInspection data comes from dummyDataInternalEvaluation.inc.php
 include_once 'includes/dummyDataInspection.inc.php';
 
 
 // All three below are used for a different report templating structure
-// (new PDFExport($oInternalEvaluation))->create();
+
+(new PDFExport($oInternalEvaluation))->create();
 // (new PDFExport($oExternalEvaluation))->create();
-(new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
+// (new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
 
 
 ?>
