@@ -64,17 +64,19 @@ public function create(string $destination = null) : void {
         $stylesheet = file_get_contents($this->vStylingFileLocation);
         $this->mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
 
+        // Add HTML content
         $this->mpdf->SetHTMLHeader($this->report->getHeaderHTML());
         $this->mpdf->SetHTMLFooter($this->report->getFooterHTML());
         $this->mpdf->WriteHTML($this->report->getContentHTML());
 
         // Confirm the destination or set the default
-    $allowedDestinations = ["I", "D", "F", "S"];
-    if (!in_array($destination, $allowedDestinations) || empty($destination)) {
-        $destination = $this->defaultDestination;
-    }
+        $allowedDestinations = ["I", "D", "F", "S"];
+        if (!in_array($destination, $allowedDestinations) || empty($destination)) {
+            $destination = $this->defaultDestination;
+        }
 
-    $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);    
+        // Export the PDF
+        $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);    
 
     } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
