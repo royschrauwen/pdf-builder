@@ -2,7 +2,7 @@
 
 
 /**
- * EQUANS PDF External Evaluation
+ * EQUANS PDF Reports - External Evaluation Template
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0

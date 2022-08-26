@@ -1,6 +1,6 @@
 <?php
 /**
- * EQUANS PDF Reports
+ * EQUANS PDF Reports - Internal Evaluation Template
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0

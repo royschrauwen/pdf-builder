@@ -1,6 +1,6 @@
 <?php
 /**
- * EQUANS PDF Inspection PDF
+ * EQUANS PDF Reports - Inspection Template
  *
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0

@@ -27,6 +27,6 @@ class Finding {
      */
     public function get(string $property) : mixed
     {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : false;
+        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : null;
     }
 }
