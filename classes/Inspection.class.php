@@ -89,14 +89,11 @@ class Inspection extends Report {
                 </div>
                 ';
     
-
-
-                // // Images, max 2 per row
+                // Images indien aanwezig
                 if(count($finding->get('aImages')) > 0) {
 
                     $vContentHTML .= '<table class="report-images">';
                     $vContentHTML .= '<tr>';
-
 
                     for ($i=0; $i < count($finding->get('aImages')); $i++) { 
                         $vContentHTML .= "<td><center><img class='rapport-afbeelding' alt='' src='" . $finding->get('aImages')[$i] . "'></center></td>";
@@ -104,43 +101,28 @@ class Inspection extends Report {
 
                     $vContentHTML .= '</tr>';
                     $vContentHTML .= '</table>';
-
                 }
 
-                
-        
-        
                 $vContentHTML .= '
                         <div class="inspection-finding">
                 
                         <p><b>Reeds genomen acties</b><br>' . $finding->get('vActionsTaken') . '</p>';
+    
         
-        
-        
-        
-        // // Vervolgacties indien aanwezig
-        if(count($finding->get('aFollowUpActions')) > 0) {
+                // Vervolgacties indien aanwezig
+                if(count($finding->get('aFollowUpActions')) > 0) {
 
-            $vContentHTML .= '
-            <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
+                    $vContentHTML .= '
+                    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
 
-            for ($i=0; $i < count($finding->get('aFollowUpActions')) ; $i++) { 
-                $vContentHTML .= $finding->get('aFollowUpActions')[$i]->getSingleActionHTML($i);
-        }
+                    for ($i=0; $i < count($finding->get('aFollowUpActions')) ; $i++) { 
+                        $vContentHTML .= $finding->get('aFollowUpActions')[$i]->getSingleActionHTML($i);
+                    }
+                }
 
-
-        }
-
-
-        
-
-        $vContentHTML .= '</div></div>';
+                $vContentHTML .= '</div></div>';
             }
-        
-
         }
-
-
         return $vContentHTML;
     }
 

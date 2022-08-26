@@ -12,36 +12,42 @@ class PDFExport {
 
 private $mpdf;
 private $defaultDestination = "I";
-private $vReportTitle = 'idReport';
-private $vReportAuthor = 'vDepartment';
 private $vReportCreator = 'EQUANS';
-private $vReportSubject = 'vWorkingTitle';
+
+private $vReportTitleParameter = 'idReport';
+private $vReportFileNameParamater = 'idReport';
+private $vReportAuthorParameter = 'vDepartment';
+private $vReportSubjectParameter = 'vWorkingTitle';
+
 private $vStylingFileLocation = 'style\report.css';
 
 public function __construct(private Report $report) {
-    // Create PDF
-    $this->mpdf = new \Mpdf\Mpdf(['setAutoTopMargin' => 'stretch']);
-
-    // Set metadata
-    $this->setPDFMetaData();
-
-    // Import styling
-    $stylesheet = file_get_contents($this->vStylingFileLocation);
-    $this->mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
-    }
+    // Create PDF using the mPDF library
+    $this->mpdf = new \Mpdf\Mpdf([
+        'setAutoTopMargin' => 'stretch', 
+        'setAutoBottomMargin' => 'stretch'
+    ]);
+}
 
 
 /** Sets the metadata for the PDF. */
 protected function setPDFMetaData() : void {
-    $this->mpdf->SetTitle($this->report->get($this->vReportTitle));
-    $this->mpdf->SetAuthor($this->report->get($this->vReportAuthor));
+    $this->mpdf->SetTitle($this->report->get($this->vReportTitleParameter));
+    $this->mpdf->SetAuthor($this->report->get($this->vReportAuthorParameter));
     $this->mpdf->SetCreator($this->vReportCreator);
-    $this->mpdf->SetSubject($this->report->get($this->vReportSubject));
+    $this->mpdf->SetSubject($this->report->get($this->vReportSubjectParameter));
 }
 
 
 public function create() : void {
     try {
+
+        // Set metadata
+        $this->setPDFMetaData();
+
+        // Import styling
+        $stylesheet = file_get_contents($this->vStylingFileLocation);
+        $this->mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
 
         $this->mpdf->SetHTMLHeader($this->report->getHeaderHTML());
         $this->mpdf->SetHTMLFooter($this->report->getFooterHTML());
@@ -74,18 +80,7 @@ private function exportPDF(string $destination = null) : void {
         $destination = $this->defaultDestination;
     }
 
-    $this->mpdf->Output($this->report->get($this->vReportTitle).'.pdf', $destination);
-}
-
-
-/** Puts the images in the PDF, max 2 per row */
-private function displayImages() : void {
-    $this->mpdf->WriteHTML($this->report->getImageHTML());
-}
-
-/** Puts the Follow Up Actions in the PDF */
-private function displayFollowUpActions() : void {
-    $this->mpdf->WriteHTML($this->report->getFollowUpActionsHTML());
+    $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);
 }
 
 }
