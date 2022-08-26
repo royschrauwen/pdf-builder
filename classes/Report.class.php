@@ -6,7 +6,7 @@
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
  */ 
-class Report {
+abstract class Report {
     
     function __construct (
         protected ?string $vWorkingTitle,
@@ -38,6 +38,9 @@ class Report {
         protected ?array $aFollowUpActions,
         protected ?string $vEffectiveness
     ) {}
+
+
+    abstract public function getHeaderHTML(): string;
 
     /**
      * Get's the value of an object's property.

@@ -6,7 +6,7 @@
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
  */ 
-class Evaluation extends Report {
+abstract class Evaluation extends Report {
     
     function __construct(
         protected ?string $vWorkingTitle,

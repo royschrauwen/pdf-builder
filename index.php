@@ -27,7 +27,7 @@ include_once 'includes/dummyDataInspection.inc.php';
 // All three below are used for a different report templating structure
 // (new PDFExport($oInternalEvaluation))->create();
 // (new PDFExport($oExternalEvaluation))->create();
-(new PDFExport($oInspection))->create();
+(new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
 
 
 ?>

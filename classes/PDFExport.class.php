@@ -10,6 +10,11 @@
  */ 
 class PDFExport {
 
+const OUTPUT_DOWNLOAD = "D";
+const OUTPUT_INLINE = "I";
+const OUTPUT_FILE= "F";
+const OUTPUT_STRING = "S";
+
 private $mpdf;
 private $defaultDestination = "I";
 private $vReportCreator = 'EQUANS';
@@ -21,7 +26,13 @@ private $vReportSubjectParameter = 'vWorkingTitle';
 
 private $vStylingFileLocation = 'style\report.css';
 
-public function __construct(private Report $report) {
+private Report $report;
+
+
+public function __construct(
+    Report $report,
+    ) {
+        $this->report = $report;
     // Create PDF using the mPDF library
     $this->mpdf = new \Mpdf\Mpdf([
         'setAutoTopMargin' => 'stretch', 
@@ -30,20 +41,24 @@ public function __construct(private Report $report) {
 }
 
 
-/** Sets the metadata for the PDF. */
-protected function setPDFMetaData() : void {
-    $this->mpdf->SetTitle($this->report->get($this->vReportTitleParameter));
-    $this->mpdf->SetAuthor($this->report->get($this->vReportAuthorParameter));
-    $this->mpdf->SetCreator($this->vReportCreator);
-    $this->mpdf->SetSubject($this->report->get($this->vReportSubjectParameter));
-}
-
-
-public function create() : void {
+/**
+ * Creates the PDF file and exports it to the browser.
+ *  
+ * * @param string|null $destination The destination of the PDF file.
+ * I -send the file inline to the browser (Inline)
+ * D -send to the browser and force a file download (Download)
+ * F -save to a local file (File)
+ * S -return the document as a string (String)
+ * If the destination is not specified or incorrect, the PDF will be defaulted
+ */
+public function create(string $destination = null) : void {
     try {
 
         // Set metadata
-        $this->setPDFMetaData();
+        $this->mpdf->SetTitle($this->report->get($this->vReportTitleParameter));
+        $this->mpdf->SetAuthor($this->report->get($this->vReportAuthorParameter));
+        $this->mpdf->SetCreator($this->vReportCreator);
+        $this->mpdf->SetSubject($this->report->get($this->vReportSubjectParameter));
 
         // Import styling
         $stylesheet = file_get_contents($this->vStylingFileLocation);
@@ -53,7 +68,13 @@ public function create() : void {
         $this->mpdf->SetHTMLFooter($this->report->getFooterHTML());
         $this->mpdf->WriteHTML($this->report->getContentHTML());
 
-        $this->exportPDF();    
+        // Confirm the destination or set the default
+    $allowedDestinations = ["I", "D", "F", "S"];
+    if (!in_array($destination, $allowedDestinations) || empty($destination)) {
+        $destination = $this->defaultDestination;
+    }
+
+    $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);    
 
     } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
@@ -61,26 +82,5 @@ public function create() : void {
     }
 }
 
-
-/**
- * Generates the PDF file and exports it
- *
- * @param string|null $destination The destination of the PDF file.
- * I -send the file inline to the browser (Inline)
- * D -send to the browser and force a file download (Download)
- * F -save to a local file (File)
- * S -return the document as a string (String)
- * If the destination is not specified or incorrect, the PDF will be defaulted
- */
-private function exportPDF(string $destination = null) : void {
-
-    // Confirm the destination or set the default
-    $allowedDestinations = ["I", "D", "F", "S"];
-    if (!in_array($destination, $allowedDestinations) || empty($destination)) {
-        $destination = $this->defaultDestination;
-    }
-
-    $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);
-}
 
 }
