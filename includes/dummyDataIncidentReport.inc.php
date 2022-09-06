@@ -15,8 +15,8 @@ $oIndicentReport = new IncidentReport(
     vLocationDescription: "Kantoor Aptic",
     vDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quam laborum, dignissimos dolor eum officiis ut quibusdam dolorum iste eius id po nostrum in molestias, perferendis omnis a mollitia cum.",
     aImages: [
-        "http://placekitten.com/400/300", 
-        "http://placekitten.com/1200/900"
+        "https://placedog.net/400/300", 
+        "https://placedog.net/800/600"
         ],
     vInjuredPersonType: 'EQUANS Medewerker',
     vInjuredInjuryType: 'FAC - Eerste hulp/BHV',
