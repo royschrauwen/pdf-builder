@@ -35,7 +35,7 @@ class IncidentReport extends Report {
     protected ?string $vRiskFactors;
     protected ?string $vRiskFactorsDescription;
 
-    protected ?bool $bIsDone;
+    protected ?bool $bIsSolved;
 
     protected ?string $vDirectActionsWho;
     protected ?string $vDirectActionsHow;
@@ -74,7 +74,7 @@ class IncidentReport extends Report {
         string $vIndirectCauses,
         string $vRiskFactors,
         string $vRiskFactorsDescription,
-        bool $bIsDone,
+        bool $bIsSolved,
         string $vDirectActionsWho,
         string $vDirectActionsHow,
         string $dtDirectActionsWhen,
@@ -112,7 +112,7 @@ class IncidentReport extends Report {
         $this->vIndirectCauses = $vIndirectCauses;
         $this->vRiskFactors = $vRiskFactors;
         $this->vRiskFactorsDescription = $vRiskFactorsDescription;
-        $this->bIsDone = $bIsDone;
+        $this->bIsSolved = $bIsSolved;
         $this->vDirectActionsWho = $vDirectActionsWho;
         $this->vDirectActionsHow = $vDirectActionsHow;
         $this->dtDirectActionsWhen = $dtDirectActionsWhen;
@@ -120,6 +120,10 @@ class IncidentReport extends Report {
 
     }
 
+    /** Converts a boolean value to Ja or Nee */
+    protected function booleanToYesNo(bool $bValue): string {
+        return $bValue ? 'Ja' : 'Nee';
+    }
     
     /** Creates the HTML for the Header of the Internal Evaluation template */
     public function getHeaderHTML() : string {
@@ -240,15 +244,15 @@ class IncidentReport extends Report {
                 <tr>
                     <td colspan="1">
                         <b>Sanctie van toepassing?</b>: ' 
-                        . $this->get('bSanction') . '
+                        . $this->booleanToYesNo($this->get('bSanction')) . '
                     </td>
                     <td colspan="1">
                         <b>REX?</b>: ' 
-                        . $this->get('bRex') . '
+                        . $this->booleanToYesNo($this->get('bRex')) . '
                     </td>
                     <td colspan="1">
                         <b>HIPO?</b>: ' 
-                        . $this->get('bHipo') . '
+                        . $this->booleanToYesNo($this->get('bHipo')) . '
                     </td>
                 </tr>
 
@@ -299,7 +303,7 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Is het reeds opgelost? </b>
-                    ' . $this->get('bIsDone') . '
+                    ' . $this->booleanToYesNo($this->get('bIsSolved')) . '
                 </td>
             </tr>
             <tr>
