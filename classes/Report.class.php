@@ -5,12 +5,14 @@
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
- */ 
+ */
+
+
 abstract class Report {
 
     protected ?string $vWorkingTitle;
     protected ?string $idReport;
-    protected ?string $vType;
+    protected ?int $vType;
     protected ?string $dtDateTime;
     protected ?string $vDepartment;
     protected ?string $vReportedByName;
@@ -125,6 +127,24 @@ abstract class Report {
     }
 
 
+    public static function createListFromArray(array $array){
+        if(count($array) == 1) {
+            foreach ($array as $item) {
+                $returnHTML = $item;
+            }
+        }
+
+        if(count($array) > 1) {
+            $returnHTML = '<ul>';
+
+            foreach ($array as $item) {
+                $returnHTML .= '<li>' . $item . '</li>';
+            }
+            $returnHTML .= '</ul>';
+        }
+
+        return $returnHTML;
+    }
     
 
     /**
@@ -158,11 +178,21 @@ abstract class Report {
      */
     public function getFollowUpActionsHTML() : string {
 
+
         $vFollowUpActionHTML = '
         <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
 
-        for ($i=0; $i < count($this->aFollowUpActions) ; $i++) { 
-            $vFollowUpActionHTML .= $this->aFollowUpActions[$i]->getSingleActionHTML($i);
+
+        for ($i=0; $i < count($this->aFollowUpActions) ; $i++) {
+            $followUpAction = new FollowUpAction(
+                     $this->aFollowUpActions[$i]['description'],
+                     $this->aFollowUpActions[$i]['actionType'],
+                     $this->aFollowUpActions[$i]['colleague']['name'],
+                     $this->aFollowUpActions[$i]['linkedColleague']['name'],
+                     $this->aFollowUpActions[$i]['tsPlanned']
+            );
+            $vFollowUpActionHTML .= $followUpAction->getSingleActionHTML($i);
+            //$vFollowUpActionHTML .= $this->aFollowUpActions[$i]->getSingleActionHTML($i);
         }
         
         return $vFollowUpActionHTML;

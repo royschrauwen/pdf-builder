@@ -9,7 +9,6 @@
 class Inspection extends Report {
 
     protected ?string $idReport;
-    protected ?string $vType;
     protected ?string $vDate;
     protected ?string $vDepartment;
     protected ?string $vReportedByName;
@@ -22,7 +21,6 @@ class Inspection extends Report {
 
     function __construct(
         string $idReport,
-        string $vType,
         string $vDate,
         string $vDepartment,
         string $vReportedByName,

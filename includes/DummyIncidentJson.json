@@ -1,0 +1,273 @@
+{
+  "_id": 2022000052,
+  "amdSt": 0,
+  "amdId": 2022000052,
+  "amdTs": 1663052412,
+  "reportSpec": 1016,
+  "reportType": 4,
+  "creator": {
+    "id": 1101,
+    "email": "marcelo@aptic.nl",
+    "dsDN": "",
+    "name": "Marcelo Dias Avelino",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "EQUANS Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "06 123 456 78"
+  },
+  "location": {
+    "coordinates": [],
+    "spot": "Rotterdam",
+    "clientName": "Aptic"
+  },
+  "tsDate": 1654259820,
+  "tsReportStarted": "1654259825",
+  "description": "generieke omschrijving",
+  "evidence": {
+    "photo": [
+      "https://placedog.net/400/300",
+      "https://placedog.net/800/600"
+    ],
+    "audio": []
+  },
+  "pplAffected": {
+    "witness": [
+      {
+        "personType": "employee",
+        "person": {
+          "id": 1044,
+          "phoneNumber": "",
+          "email": "joris@aptic.nl",
+          "dsDN": "",
+          "cip": "",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "EQUANS Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "name": "Joris'O de O\"Wit"
+        },
+        "comment": "opmerking over Joris"
+      }
+
+    ],
+    "involved": [],
+    "injured": [
+      {
+        "personType": "external",
+        "person": {
+          "id": 0,
+          "dsDN": "",
+          "cip": "",
+          "name": "billy",
+          "email": "",
+          "phoneNumber": ""
+        },
+        "injuryType": "FAT",
+        "consequences": [],
+        "absence": {
+          "tsStart": null,
+          "tsEnd": null
+        }
+      },
+      {
+        "personType": "employee",
+        "person": {
+          "id": 1044,
+          "phoneNumber": "",
+          "email": "joris@aptic.nl",
+          "dsDN": "",
+          "cip": "",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "EQUANS Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "name": "Joris'O de O\"Wit"
+        },
+        "injuryType": "MTC",
+        "consequences": [
+          "leg"
+        ],
+        "absence": {
+          "tsStart": null,
+          "tsEnd": null
+        }
+      }
+    ]
+  },
+  "user": {
+    "id": 1045,
+    "phoneNumber": "",
+    "email": "joris+nltest@aptic.nl",
+    "dsDN": "",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 0,
+        "name": ""
+      },
+      "type": ""
+    },
+    "name": "Joris Test Locales"
+  },
+  "department": 1008,
+  "timestamps": {
+    "submitted": 1654259825,
+    "edited": 1663052412,
+    "verified": null,
+    "inProgress": null,
+    "deleted": null
+  },
+  "consequences": {
+    "list": [
+      "negativePublicity",
+      "iszw"
+    ],
+    "reasons": [],
+    "costs": {
+      "estimatedCosts": 1234,
+      "fineGiven": false,
+      "fineAmount": 0
+    },
+    "description": "1 dode, kon erger"
+  },
+  "projectNameNumber": "Test project number 1",
+  "gravityLvl": 1,
+  "pplInformed": "Roy is geinformeerd",
+  "causes": {
+    "description": "geen idee wat we hier moeten invullen",
+    "direct": [
+      "gettingStuck",
+      "ergonomics"
+    ],
+    "indirect": [
+      "taskWrongMaterials",
+      "locationWrongBalance"
+    ]
+  },
+  "riskFactors": {
+    "list": [
+      "OH",
+      "CO"
+    ],
+    "description": "risico factoren"
+  },
+  "directActions": {
+    "isDone": true,
+    "how": "simpel",
+    "who": {
+      "name": "joris"
+    },
+    "tsDone": 1662981180
+  },
+  "actions": [
+    {
+      "showAction": true,
+      "correction": {
+        "correction": true,
+        "correcting": false
+      },
+      "actionType": "internal",
+      "description": "actie 1",
+      "informColleague": false,
+      "colleague": {
+        "id": 1044,
+        "phoneNumber": "",
+        "email": "joris@aptic.nl",
+        "dsDN": "",
+        "cip": "",
+        "department": {
+          "branch": {
+            "id": 1008,
+            "name": "EQUANS Services Noord B.V."
+          },
+          "type": "internal"
+        },
+        "name": "Joris'O de O\"Wit"
+      },
+      "linkedColleague": {
+        "id": 1044,
+        "dsDN": "",
+        "name": "Joris'O de O\"Wit",
+        "email": "joris@aptic.nl",
+        "department": {
+          "branch": {
+            "id": 1008,
+            "name": "EQUANS Services Noord B.V."
+          },
+          "type": "internal"
+        },
+        "cip": ""
+      },
+      "tsPlanned": 1663365600,
+      "note": [],
+      "tsCreated": 1663052412
+    },
+    {
+      "showAction": true,
+      "correction": {
+        "correction": false,
+        "correcting": true
+      },
+      "actionType": "external",
+      "description": "actie 2",
+      "informColleague": false,
+      "colleague": {
+        "id": 0,
+        "dsDN": "",
+        "cip": "",
+        "name": "Joris",
+        "email": "joris@aptic.nl",
+        "phoneNumber": "",
+        "department": {
+          "branch": {
+            "id": 0,
+            "name": "Aptic"
+          },
+          "type": "external"
+        }
+      },
+      "linkedColleague": {
+        "id": 1044,
+        "dsDN": "",
+        "name": "Joris'O de O\"Wit",
+        "email": "joris@aptic.nl",
+        "department": {
+          "branch": {
+            "id": 1008,
+            "name": "EQUANS Services Noord B.V."
+          },
+          "type": "internal"
+        },
+        "cip": ""
+      },
+      "tsPlanned": 1663452000,
+      "note": [],
+      "tsCreated": 1663052412
+    }
+  ],
+  "isManaged": true,
+  "causesDescription": "niet opgelet",
+  "sanction": {
+    "linked": true,
+    "type": "verbalWarning",
+    "comment": "sanctie aantekening"
+  },
+  "rex": {
+    "linked": false
+  },
+  "hipo": {
+    "linked": true,
+    "reason": "waarom niet?"
+  }
+}

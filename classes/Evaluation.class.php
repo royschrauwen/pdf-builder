@@ -10,7 +10,6 @@ abstract class Evaluation extends Report {
     
     protected ?string $vWorkingTitle;
     protected ?string $idReport;
-    protected ?string $vType;
     protected ?string $dtDateTime;
     protected ?string $vDepartment;
     protected ?string $vReportedByName;
@@ -40,7 +39,6 @@ abstract class Evaluation extends Report {
     function __construct(
         string $vWorkingTitle,
         string $idReport,
-        string $vType,
         string $dtDateTime,
         string $vDepartment,
         string $vReportedByName,

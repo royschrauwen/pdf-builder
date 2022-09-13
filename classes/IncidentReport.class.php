@@ -7,117 +7,91 @@
  * @since      Class available since Release 0.1.0
  */ 
 class IncidentReport extends Report {
-    
+
     protected ?string $vSubtype;
 
-    protected ?string $vInjuredPersonType;
-    protected ?string $vInjuredInjuryType;
-    protected ?string $vInjuredConsequences;
-    protected ?string $dtInjuredAbsenceStart;
-    protected ?string $dtInjuredAbsenceEnd;
-
-    protected ?string $vWitnessName;
-    protected ?string $vWitnessType;
+    protected ?array $aInjured;
+    protected ?array $aWitness;
 
     protected ?string $vPeopleInformed;
 
-    protected ?string $vConsequences;
+    protected ?array $aConsequences;
     protected ?string $vConsequencesDescription;
 
     protected ?bool $bSanction;
     protected ?bool $bRex;
     protected ?bool $bHipo;
 
-    protected ?string $vDirectCauses;
+    protected ?array $aDirectCauses;
     protected ?string $vDirectCauseDescription;
-    protected ?string $vIndirectCauses;
+    protected ?array $aIndirectCauses;
 
-    protected ?string $vRiskFactors;
+    protected ?array $aRiskFactors;
     protected ?string $vRiskFactorsDescription;
 
     protected ?bool $bIsSolved;
 
-    protected ?string $vDirectActionsWho;
+    protected ?array $aDirectActionsWho;
     protected ?string $vDirectActionsHow;
     protected ?string $dtDirectActionsWhen;
 
 
-    function __construct(
-        string $vType,
-        string $dtDateTime,
-        string $vSubtype,
-        string $idReport,
-        string $vDepartment,
-        string $vReportedByName,
-        string $vReportedByPhone,
-        string $vReportedByEmail,
-        string $vProjectNameNumber,
-        string $vClientName,
-        string $vLocationDescription,
-        string $vDescription,
-        array  $aImages,
-        string $vInjuredPersonType,
-        string $vInjuredInjuryType,
-        string $vInjuredConsequences,
-        string $dtInjuredAbsenceStart,
-        string $dtInjuredAbsenceEnd,
-        string $vWitnessName,
-        string $vWitnessType,
-        string $vPeopleInformed,
-        string $vConsequences,
-        string $vConsequencesDescription,
-        bool $bSanction,
-        bool $bRex,
-        bool $bHipo,
-        string $vDirectCauses,
-        string $vDirectCauseDescription,
-        string $vIndirectCauses,
-        string $vRiskFactors,
-        string $vRiskFactorsDescription,
-        bool $bIsSolved,
-        string $vDirectActionsWho,
-        string $vDirectActionsHow,
-        string $dtDirectActionsWhen,
-        array  $aFollowUpActions,
-    ) {
 
-        $this->vType = $vType;
-        $this->dtDateTime = $dtDateTime;
-        $this->vSubtype = $vSubtype;
-        $this->idReport = $idReport;
-        $this->vDepartment = $vDepartment;
-        $this->vReportedByName = $vReportedByName;
-        $this->vReportedByPhone = $vReportedByPhone;
-        $this->vReportedByEmail = $vReportedByEmail;
-        $this->vProjectNameNumber = $vProjectNameNumber;
-        $this->vClientName = $vClientName;
-        $this->vLocationDescription = $vLocationDescription;
-        $this->vDescription = $vDescription;
-        $this->aImages = $aImages;
-        $this->vInjuredPersonType = $vInjuredPersonType;
-        $this->vInjuredInjuryType = $vInjuredInjuryType;
-        $this->vInjuredConsequences = $vInjuredConsequences;
-        $this->dtInjuredAbsenceStart = $dtInjuredAbsenceStart;
-        $this->dtInjuredAbsenceEnd = $dtInjuredAbsenceEnd;
-        $this->vWitnessName = $vWitnessName;
-        $this->vWitnessType = $vWitnessType;
-        $this->vPeopleInformed = $vPeopleInformed;
-        $this->vConsequences = $vConsequences;
-        $this->vConsequencesDescription = $vConsequencesDescription;
-        $this->bSanction = $bSanction;
-        $this->bRex = $bRex;
-        $this->bHipo = $bHipo;
-        $this->vDirectCauses = $vDirectCauses;
-        $this->vDirectCauseDescription = $vDirectCauseDescription;
-        $this->vIndirectCauses = $vIndirectCauses;
-        $this->vRiskFactors = $vRiskFactors;
-        $this->vRiskFactorsDescription = $vRiskFactorsDescription;
-        $this->bIsSolved = $bIsSolved;
-        $this->vDirectActionsWho = $vDirectActionsWho;
-        $this->vDirectActionsHow = $vDirectActionsHow;
-        $this->dtDirectActionsWhen = $dtDirectActionsWhen;
-        $this->aFollowUpActions = $aFollowUpActions;
+    function __construct(string $jsonData) {
 
+        $reportData = json_decode(json_decode($jsonData), true);
+
+        $this->vType = SJAQuery::get($reportData, 'reportType') ?? 0;
+        $this->dtDateTime = SJAQuery::get($reportData, 'tsDate') ? date('d-m-Y H:i', SJAQuery::get($reportData, 'tsDate')) : "-";
+        $this->vSubtype = SJAQuery::get($reportData, 'reportSpec') ?? 0;
+        $this->idReport = SJAQuery::get($reportData, '_id') ?? 0;
+        $this->vDepartment = SJAQuery::get($reportData, 'department') ?? 0;
+        $this->vReportedByName = SJAQuery::get($reportData, 'creator.name') ?? "";
+        $this->vReportedByPhone = SJAQuery::get($reportData, 'creator.phoneNumber') ?? "";
+        $this->vReportedByEmail = SJAQuery::get($reportData, 'creator.email') ?? "";
+        $this->vProjectNameNumber = SJAQuery::get($reportData, 'projectNameNumber') ?? "";
+        $this->vClientName = SJAQuery::get($reportData, 'location.clientName') ?? "";
+        $this->vLocationDescription = SJAQuery::get($reportData, 'location.spot') ?? "";
+        $this->vDescription = SJAQuery::get($reportData, 'description') ?? "";
+        $this->aImages = SJAQuery::get($reportData, 'evidence.photo') ?? "";
+
+        $this->aInjured = SJAQuery::get($reportData, 'pplAffected.injured') ?? "";
+
+        $this->vInjuredPersonType = SJAQuery::get($reportData, 'pplAffected.injured.personType');
+        $this->vInjuredInjuryType = SJAQuery::get($reportData, 'pplAffected.injured.injuryType');
+        $this->vInjuredConsequences = SJAQuery::get($reportData, 'pplAffected.injured.consequences');
+        $this->dtInjuredAbsenceStart = date('d-m-Y', SJAQuery::get($reportData, 'pplAffected.injured.absence.tsStart'));
+        $this->dtInjuredAbsenceEnd = date('d-m-Y', SJAQuery::get($reportData, 'pplAffected.injured.absence.tsEnd'));
+
+        $this->aWitness = SJAQuery::get($reportData, 'pplAffected.witness') ?? "";
+
+
+        $this->vWitnessName = SJAQuery::get($reportData, 'pplAffected.witness.person.name');
+        $this->vWitnessType = SJAQuery::get($reportData, 'pplAffected.witness.personType');
+
+
+        $this->vPeopleInformed = SJAQuery::get($reportData, 'pplInformed') ?? "";
+
+        $this->aConsequences = SJAQuery::get($reportData, 'consequences.list') ?? "";
+        $this->vConsequencesDescription = SJAQuery::get($reportData, 'consequences.description') ?? "";
+
+        $this->bSanction = SJAQuery::get($reportData, 'sanction.linked') ?? false;
+        $this->bRex = SJAQuery::get($reportData, 'rex.linked') ?? false;
+        $this->bHipo = SJAQuery::get($reportData, 'hipo.linked') ?? false;
+
+        $this->aDirectCauses = SJAQuery::get($reportData, 'causes.direct') ?? "";
+        $this->vDirectCauseDescription = SJAQuery::get($reportData, 'causes.description') ?? "";
+        $this->aIndirectCauses = SJAQuery::get($reportData, 'causes.indirect') ?? "";
+
+        $this->aRiskFactors = SJAQuery::get($reportData, 'riskFactors.list') ?? "";
+        $this->vRiskFactorsDescription = SJAQuery::get($reportData, 'riskFactors.description') ?? "";
+        $this->bIsSolved = SJAQuery::get($reportData, 'directActions.isDone') ?? false;
+
+        $this->aDirectActionsWho = SJAQuery::get($reportData, 'directActions.who') ?? "";
+        $this->vDirectActionsHow = SJAQuery::get($reportData, 'directActions.how') ?? "";
+        $this->dtDirectActionsWhen = SJAQuery::get($reportData, 'directActions.tsDone') ? date('d-m-Y', SJAQuery::get($reportData, 'directActions.tsDone')) : "-";
+
+        $this->aFollowUpActions = SJAQuery::get($reportData, 'actions') ?? "";
     }
 
     /** Converts a boolean value to Ja or Nee */
@@ -163,9 +137,9 @@ class IncidentReport extends Report {
         <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td><b>Melder</b> ' . $this->vReportedByName . '</td>
-                    <td><b>Tel</b> ' . $this->vReportedByPhone . '</td>
-                    <td><b>E-mailadres</b> ' . $this->vReportedByEmail . '</td>
+                    <td><b>Melder</b><br>' . $this->vReportedByName . '</td>
+                    <td><b>Tel</b><br>' . $this->vReportedByPhone . '</td>
+                    <td><b>E-mailadres</b><br>' . $this->vReportedByEmail . '</td>
                 </tr>
 
                 <tr>
@@ -188,29 +162,59 @@ class IncidentReport extends Report {
             $vContentHTML .= $this->getImageHTML();
         }
 
+
+
         $vContentHTML .= '
         <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td><b>Wie is/zijn er betrokken?</b> Type: ' . $this->vInjuredPersonType . '</td>
+                    <td><b>Wie is/zijn er betrokken?</b></td>
                 </tr>
+                <tr><td>
+                
+                ';
 
-                <tr>
-                    <td>
-                        <b>Ongevalstype: </b> ' . $this->vInjuredInjuryType . '
-                    </td>
-                    <td>
-                        <b>Gevolg: </b> ' . $this->vInjuredConsequences . '
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <b>Verzuim eerste dag: </b> ' . $this->dtInjuredAbsenceStart . '
-                    </td>
-                    <td>
-                        <b>Verzuim laatste dag: </b> ' . $this->dtInjuredAbsenceEnd . '
-                    </td>
-                </tr>
+            for ($i=0; $i<count($this->aInjured); $i++) {
+
+                $vContentHTML .= '<table>
+                <tr >
+                    <td colspan="2"> <b>Type:</b> ' .  $this->aInjured[$i]['personType'] . ' </td >
+                </tr >
+                <tr >
+                    <td >
+                        <b > Ongevalstype: </b > ' .  $this->aInjured[$i]['injuryType'] . '
+                    </td >
+                    <td >
+                        <b > Gevolg: </b > ';
+
+
+                $this->aInjured[$i]['consequences'] ? $vContentHTML .= Report::createListFromArray($this->aInjured[$i]['consequences']) : '';
+
+
+                $vContentHTML .= '</td >
+                </tr >
+                <tr >
+                    <td >
+                        <b > Verzuim eerste dag: </b > ';
+
+                $vContentHTML .= $this->aInjured[$i]['absence']['tsStart'] ? date('d-m-Y', $this->aInjured[$i]['absence']['tsStart']) : '-';
+
+                    $vContentHTML .= '</td >
+                    <td >
+                        <b > Verzuim laatste dag: </b > ';
+
+                $vContentHTML .= $this->aInjured[$i]['absence']['tsEnd'] ? date('d-m-Y', $this->aInjured[$i]['absence']['tsEnd']) : '-';
+
+                $vContentHTML .= '</td >
+                </tr >
+                
+                </table >';
+
+
+            }
+
+        $vContentHTML .= '</td></tr>
+                
             </table>
             <table class="rapport-section">
 
@@ -218,10 +222,19 @@ class IncidentReport extends Report {
                     <td>
                         <b>Getuigen</b>
                     <br>
-                        <b>Naam:</b> ' . $this->vWitnessName . '
+                        <b>Naam:</b> ';
 
-                        - ' . $this->vWitnessType . '
-                    </td>
+
+            for($w=0; $w < count($this->aWitness); $w++) {
+                $vContentHTML .= $this->aWitness[$w]['person']['id'] . ' (' . $this->aWitness[$w]['personType'] . ')';
+                $vContentHTML .= $w < count($this->aWitness)-1 ? ', ' : '';
+            }
+
+
+                    
+                    
+                    
+                    $vContentHTML .= '</td>
 
             </table>
 
@@ -233,7 +246,20 @@ class IncidentReport extends Report {
 
             <table class="rapport-section">
                 <tr>
-                <td><b>Overige gevolgen</b><br>' . $this->vConsequences . '</td>
+                <td><b>Overige gevolgen</b><br>';
+
+                if(count($this->aConsequences) > 0) {
+                    $vContentHTML .= '<ul>';
+
+                    foreach ($this->aConsequences as $consequence) {
+                        $vContentHTML .= '<li>' . $consequence . '</li>';
+                    }
+                    $vContentHTML .= '</ul>';
+                }
+
+
+
+        $vContentHTML .= '</td>
                 </tr>
                 <tr>
                 <td><b>Omschrijving gevolgen</b><br>' . $this->vConsequencesDescription . '</td>
@@ -264,9 +290,11 @@ class IncidentReport extends Report {
             <table class="rapport-section">
             <tr>
                 <td>
-                    <b>Directe aanleiding: </b>
-                    ' . $this->vDirectCauses . '
-                </td>
+                    <b>Directe aanleiding: </b>';
+
+        $vContentHTML .= Report::createListFromArray($this->aDirectCauses);
+
+        $vContentHTML .= '</td>
             </tr>
             <tr>
                 <td>
@@ -277,13 +305,22 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Aanwijsbare oorzaken: </b>
-                    ' . $this->vIndirectCauses . '
+                    ';
+
+        $vContentHTML .= Report::createListFromArray($this->aIndirectCauses);
+
+        $vContentHTML .= '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Basis Risico Factoren: </b> 
-                    ' . $this->vRiskFactors . '
+                    ';
+
+        $vContentHTML .= Report::createListFromArray($this->aRiskFactors);
+
+        $vContentHTML .= '
+                
                 </td>
             </tr>
             <tr>
@@ -309,7 +346,14 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Wie moest volgens de melder actie ondernemen? </b>
-                    ' . $this->vDirectActionsWho . '
+                     
+                    ';
+
+        $vContentHTML .= Report::createListFromArray($this->aDirectActionsWho);
+
+        $vContentHTML .= '
+                
+                
                 </td>
             </tr>
             <tr>

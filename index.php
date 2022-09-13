@@ -4,6 +4,10 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 // I don't know how autoloaders work yet... '^_^
+
+require_once __DIR__ . '/includes/sjaquery.php';
+
+
 require_once __DIR__ . '/classes/Report.class.php';
 require_once __DIR__ . '/classes/IncidentReport.class.php';
 require_once __DIR__ . '/classes/Evaluation.class.php';
@@ -17,18 +21,20 @@ require_once __DIR__ . '/classes/PDFExport.class.php';
 
 
 // Dummy data for testing
-include_once 'includes/dummyDataInternalEvaluation.inc.php';
-include_once 'includes/dummyDataExternalEvaluation.inc.php';
-include_once 'includes/dummyDataInspection.inc.php';
-include_once 'includes/dummyDataIncidentReport.inc.php';
+//include_once 'includes/dummyDataInternalEvaluation.inc.php';
+//include_once 'includes/dummyDataExternalEvaluation.inc.php';
+//include_once 'includes/dummyDataInspection.inc.php';
+//include_once 'includes/dummyDataIncidentReport.inc.php';
+include_once 'includes/dummyDataIncidentReportv2.inc.php';
 
 
 // All three below are used for a different report templating structure
 
- (new PDFExport($oInternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
+// (new PDFExport($oInternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
 // (new PDFExport($oExternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
 //(new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
 // (new PDFExport($oIndicentReport))->create(PDFExport::OUTPUT_INLINE);
+ (new PDFExport($oIndicentReport2))->create(PDFExport::OUTPUT_INLINE);
 
 
 ?>

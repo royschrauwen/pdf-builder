@@ -37,6 +37,8 @@ class FollowUpAction {
      * @return string $vSingleActionHTML The Follow Up Action, formatted in HTML
      */
         public function getSingleActionHTML(int $i) : string {
+
+
             $vSingleActionHTML = '
 
             <table class="vervolgacties">
@@ -56,7 +58,7 @@ class FollowUpAction {
                     <td>' . $this->vActionType . '</td>
                     <td>' . $this->vReportedActionHolder . '</td>
                     <td>' . $this->vLinkedActionHolder . '</td>
-                    <td>' . $this->vPlannedDate . '</td>
+                    <td>' . date('d-m-Y', $this->vPlannedDate) . '</td>
                 </tr>
             </table>
             ';
