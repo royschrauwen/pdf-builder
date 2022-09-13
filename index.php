@@ -25,10 +25,10 @@ include_once 'includes/dummyDataIncidentReport.inc.php';
 
 // All three below are used for a different report templating structure
 
-// (new PDFExport($oInternalEvaluation))->create();
-// (new PDFExport($oExternalEvaluation))->create();
-// (new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
-(new PDFExport($oIndicentReport))->create(PDFExport::OUTPUT_INLINE);
+ (new PDFExport($oInternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
+// (new PDFExport($oExternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
+//(new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
+// (new PDFExport($oIndicentReport))->create(PDFExport::OUTPUT_INLINE);
 
 
 ?>

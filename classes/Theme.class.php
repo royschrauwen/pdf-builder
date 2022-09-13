@@ -8,8 +8,7 @@
  */ 
 class Theme {
 
-    private string $vThemeName;
-    private array  $aFindings;
+
 
     function __construct(
         string $vThemeName,
@@ -23,16 +22,24 @@ class Theme {
     }
 
 
-        /**
-     * Get's the value of an object's property.
-     *
-     * @param string $property The property to be retreived
-     * @return mixed|false The value of the requested property | The property does not exist on this object
+    private string $vThemeName;
+
+    /**
+     * @return string
      */
-    public function get(string $property) : mixed
+    public function getThemeName(): string
     {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : false;
+        return $this->vThemeName;
     }
+
+    /**
+     * @return array
+     */
+    public function getFindings(): array
+    {
+        return $this->aFindings;
+    }
+    private array  $aFindings;
 
 
 

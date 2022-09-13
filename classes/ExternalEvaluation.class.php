@@ -72,15 +72,15 @@ class ExternalEvaluation extends Evaluation {
         <table class="page-header">
         <tr>
             <td><img class="header-logo" src="images/logo.jpg" alt=""></td>
-            <td><span class="werktitel">' . $this->get('vWorkingTitle') . '</span></td>
-            <td><b>Datum en tijd</b><br>' . $this->get('dtDateTime') . '</td>
+            <td><span class="werktitel">' . $this->vWorkingTitle . '</span></td>
+            <td><b>Datum en tijd</b><br>' . $this->dtDateTime . '</td>
         </tr>
         <tr>
-            <td colspan="1"><b>Registratienr</b> ' . $this->get('idReport') . '</td>
-            <td colspan="2"><b>Meldingstype</b> ' . $this->get('vType') . '</td>
+            <td colspan="1"><b>Registratienr</b> ' . $this->idReport . '</td>
+            <td colspan="2"><b>Meldingstype</b> ' . $this->vType . '</td>
         </tr>
         <tr>
-            <td colspan="1"><b>EQUANS bedrijf</b> ' . $this->get('vDepartment') . '</td>
+            <td colspan="1"><b>EQUANS bedrijf</b> ' . $this->vDepartment . '</td>
             <td colspan="2"><b>Afdrukdatum</b> {DATE j-m-Y}</td>
 
         </tr>
@@ -99,40 +99,40 @@ class ExternalEvaluation extends Evaluation {
         <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td colspan="3"><b>Melder</b> ' . $this->get('vReportedByName') . '</td>
+                    <td colspan="3"><b>Melder</b> ' . $this->vReportedByName . '</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><b>Referentie</b> ' . $this->get('vReference') . '</td>
+                    <td colspan="3"><b>Referentie</b> ' . $this->vReference . '</td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <b>Omschrijving van de constatering</b><br>' . nl2br($this->get('vDescription')) . '
+                        <b>Omschrijving van de constatering</b><br>' . nl2br($this->vDescription) . '
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>Norm / schema / vakgebied</b><br>' . $this->get('vNorm') . '</td>
-                    <td colspan="1"><b>Normparagraaf</b><br>' . $this->get('vNormParagraph') . '</td>
+                    <td colspan="2"><b>Norm / schema / vakgebied</b><br>' . $this->vNorm . '</td>
+                    <td colspan="1"><b>Normparagraaf</b><br>' . $this->vNormParagraph . '</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><b>Klantnaam</b> ' . $this->get('vClientName') . '</td>
+                    <td colspan="3"><b>Klantnaam</b> ' . $this->vClientName . '</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>Oorzaakanalyse</b><br>
-                    ' . nl2br($this->get('vCauseAnalysis')) . '</td>
+                    ' . nl2br($this->vCauseAnalysis) . '</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>Omvanganalyse van de constatering</b><br>
-                    ' . nl2br($this->get('vSizeAnalysis')) . '</td>
+                    ' . nl2br($this->vSizeAnalysis) . '</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>Verbetervoorstel</b><br>
-                    ' . nl2br($this->get('vHowShouldBeSolved')) . '</td>
+                    ' . nl2br($this->vHowShouldBeSolved) . '</td>
                 </tr>
             </table>
         ';
 
         // Follow Up Actions in case of a follow up
-        if(count($this->get('aFollowUpActions')) > 0) {
+        if(count($this->aFollowUpActions) > 0) {
             $vContentHTML .= $this->getFollowUpActionsHTML();
         }
 
@@ -142,7 +142,7 @@ class ExternalEvaluation extends Evaluation {
             <td><b>Doeltreffendheid van de actie</b></td>
         </tr>
         <tr>
-            <td>' . $this->get('vEffectiveness') . '</td>
+            <td>' . $this->vEffectiveness . '</td>
         </tr>
     </table>
 </div>

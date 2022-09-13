@@ -35,14 +35,62 @@ class Finding {
         $this->aFollowUpActions = $aFollowUpActions;
     }
 
-            /**
-     * Get's the value of an object's property.
-     *
-     * @param string $property The property to be retreived
-     * @return mixed|false The value of the requested property | The property does not exist on this object
+    /**
+     * @return string
      */
-    public function get(string $property) : mixed
+    public function getDescription(): string
     {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : null;
+        return $this->vDescription;
     }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->vType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollegues(): string
+    {
+        return $this->vCollegues;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepartment(): string
+    {
+        return $this->vDepartment;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImages(): array
+    {
+        return $this->aImages;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActionsTaken(): string
+    {
+        return $this->vActionsTaken;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFollowUpActions(): array
+    {
+        return $this->aFollowUpActions;
+    }
+
+
+
 }

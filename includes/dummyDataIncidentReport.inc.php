@@ -2,7 +2,7 @@
 
 // Voorbeeldrapportage IncidentReport
 $oIndicentReport = new IncidentReport(
-    vType: 'Incident',
+    vType: 'Ongeval',
     dtDateTime: '2021-01-01 12:00:00',
     vSubtype: 'Geen verzuim verwacht',
     idReport: "1234567890",
@@ -18,7 +18,7 @@ $oIndicentReport = new IncidentReport(
         "https://placedog.net/400/300", 
         "https://placedog.net/800/600"
         ],
-    vInjuredPersonType: 'EQUANS Medewerker',
+    vInjuredPersonType: 'Onderaannemer',
     vInjuredInjuryType: 'FAC - Eerste hulp/BHV',
     vInjuredConsequences: 'Hand, pols, vinger',
     dtInjuredAbsenceStart: '2021-01-01',

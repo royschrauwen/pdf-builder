@@ -131,13 +131,13 @@ class IncidentReport extends Report {
         <table class="page-header">
             <tr>
                 <td colspan="2"><img class="header-logo" src="images\logo.jpg" alt=""></td>
-                <td colspan="2"><b>Meldingstype</b><br>' . $this->get('vType') . '</td>
-                <td><b>Subtype</b><br>' . $this->get('vSubtype') . '</td>
+                <td colspan="2"><b>Meldingstype</b><br>' . $this->vType . '</td>
+                <td><b>Subtype</b><br>' . $this->vSubtype . '</td>
                 </tr>
                 <tr>
-                <td colspan="2"><b>Registratienr</b><br>' . $this->get('idReport') . '</td>
-                <td colspan="2"><b>EQUANS bedrijf</b><br>' . $this->get('vDepartment') . '</td>
-                <td><b>Datum en tijd</b><br>' . $this->get('dtDateTime') . '</td>
+                <td colspan="2"><b>Registratienr</b><br>' . $this->idReport . '</td>
+                <td colspan="2"><b>EQUANS bedrijf</b><br>' . $this->vDepartment . '</td>
+                <td><b>Datum en tijd</b><br>' . $this->dtDateTime . '</td>
             </tr>
         </table>
         ';
@@ -150,7 +150,7 @@ class IncidentReport extends Report {
         <tr>
             <td><b>ENKEL VOOR INTERN GEBRUIK</b></td>
             </tr><tr>
-            <td><i>Neem contact op met de lokale HSE afdeling van ' . $this->get('vDepartment') . ' voor meer informatie</i></td>
+            <td><i>Neem contact op met de lokale HSE afdeling van ' . $this->vDepartment . ' voor meer informatie</i></td>
         </tr>
     </table>
         ';
@@ -163,20 +163,20 @@ class IncidentReport extends Report {
         <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td><b>Melder</b> ' . $this->get('vReportedByName') . '</td>
-                    <td><b>Tel</b> ' . $this->get('vReportedByPhone') . '</td>
-                    <td><b>E-mailadres</b> ' . $this->get('vReportedByEmail') . '</td>
+                    <td><b>Melder</b> ' . $this->vReportedByName . '</td>
+                    <td><b>Tel</b> ' . $this->vReportedByPhone . '</td>
+                    <td><b>E-mailadres</b> ' . $this->vReportedByEmail . '</td>
                 </tr>
 
                 <tr>
-                    <td><b>Projectnaam en -nummer</b><br>' . $this->get('vProjectNameNumber') . '</td>
-                    <td><b>Klantnaam</b><br>' . $this->get('vClientName') . '</td>
-                    <td><b>Locatiebeschrijving</b><br>' . $this->get('vLocationDescription') . '</td>
+                    <td><b>Projectnaam en -nummer</b><br>' . $this->vProjectNameNumber . '</td>
+                    <td><b>Klantnaam</b><br>' . $this->vClientName . '</td>
+                    <td><b>Locatiebeschrijving</b><br>' . $this->vLocationDescription . '</td>
                 </tr>
             </table>
             <table class="rapport-section">
                 <tr>
-                <td><b>Omschrijving</b><br>' . $this->get('vDescription') . '</td>
+                <td><b>Omschrijving</b><br>' . $this->vDescription . '</td>
                 </tr>
             </table>
 
@@ -184,7 +184,7 @@ class IncidentReport extends Report {
         ';
 
         // Images, if any
-        if(count($this->get('aImages')) > 0) {
+        if(count($this->aImages) > 0) {
             $vContentHTML .= $this->getImageHTML();
         }
 
@@ -192,23 +192,23 @@ class IncidentReport extends Report {
         <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td><b>Wie is/zijn er betrokken?</b> Type: ' . $this->get('vInjuredPersonType') . '</td>
+                    <td><b>Wie is/zijn er betrokken?</b> Type: ' . $this->vInjuredPersonType . '</td>
                 </tr>
 
                 <tr>
                     <td>
-                        <b>Ongevalstype: </b> ' . $this->get('vInjuredInjuryType') . '
+                        <b>Ongevalstype: </b> ' . $this->vInjuredInjuryType . '
                     </td>
                     <td>
-                        <b>Gevolg: </b> ' . $this->get('vInjuredConsequences') . '
+                        <b>Gevolg: </b> ' . $this->vInjuredConsequences . '
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <b>Verzuim eerste dag: </b> ' . $this->get('dtInjuredAbsenceStart') . '
+                        <b>Verzuim eerste dag: </b> ' . $this->dtInjuredAbsenceStart . '
                     </td>
                     <td>
-                        <b>Verzuim laatste dag: </b> ' . $this->get('dtInjuredAbsenceEnd') . '
+                        <b>Verzuim laatste dag: </b> ' . $this->dtInjuredAbsenceEnd . '
                     </td>
                 </tr>
             </table>
@@ -218,25 +218,25 @@ class IncidentReport extends Report {
                     <td>
                         <b>Getuigen</b>
                     <br>
-                        <b>Naam:</b> ' . $this->get('vWitnessName') . '
+                        <b>Naam:</b> ' . $this->vWitnessName . '
 
-                        - ' . $this->get('vWitnessType') . '
+                        - ' . $this->vWitnessType . '
                     </td>
 
             </table>
 
             <table class="rapport-section">
                 <tr>
-                <td><b>Wie zijn er al geïnformeerd? </b><br>' . $this->get('vPeopleInformed') . '</td>
+                <td><b>Wie zijn er al geïnformeerd? </b><br>' . $this->vPeopleInformed . '</td>
                 </tr>
             </table>
 
             <table class="rapport-section">
                 <tr>
-                <td><b>Overige gevolgen</b><br>' . $this->get('vConsequences') . '</td>
+                <td><b>Overige gevolgen</b><br>' . $this->vConsequences . '</td>
                 </tr>
                 <tr>
-                <td><b>Omschrijving gevolgen</b><br>' . $this->get('vConsequencesDescription') . '</td>
+                <td><b>Omschrijving gevolgen</b><br>' . $this->vConsequencesDescription . '</td>
                 </tr>
             </table>
 
@@ -244,15 +244,15 @@ class IncidentReport extends Report {
                 <tr>
                     <td colspan="1">
                         <b>Sanctie van toepassing?</b>: ' 
-                        . $this->booleanToYesNo($this->get('bSanction')) . '
+                        . $this->booleanToYesNo($this->bSanction) . '
                     </td>
                     <td colspan="1">
                         <b>REX?</b>: ' 
-                        . $this->booleanToYesNo($this->get('bRex')) . '
+                        . $this->booleanToYesNo($this->bRex) . '
                     </td>
                     <td colspan="1">
                         <b>HIPO?</b>: ' 
-                        . $this->booleanToYesNo($this->get('bHipo')) . '
+                        . $this->booleanToYesNo($this->bHipo) . '
                     </td>
                 </tr>
 
@@ -265,31 +265,31 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Directe aanleiding: </b>
-                    ' . $this->get('vDirectCauses') . '
+                    ' . $this->vDirectCauses . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Omschrijving directe aanleiding: </b><br> 
-                    ' . $this->get('vDirectCauseDescription') . '
+                    ' . $this->vDirectCauseDescription . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Aanwijsbare oorzaken: </b>
-                    ' . $this->get('vIndirectCauses') . '
+                    ' . $this->vIndirectCauses . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Basis Risico Factoren: </b> 
-                    ' . $this->get('vRiskFactors') . '
+                    ' . $this->vRiskFactors . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Omschrijving Basis Risico Factoren: </b><br> 
-                    ' . $this->get('vRiskFactorsDescription') . '
+                    ' . $this->vRiskFactorsDescription . '
                 </td>
             </tr>
         </table>
@@ -309,19 +309,19 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Wie moest volgens de melder actie ondernemen? </b>
-                    ' . $this->get('vDirectActionsWho') . '
+                    ' . $this->vDirectActionsWho . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Wat zag de melder als mogelijke oplossing? </b><br>
-                    ' . $this->get('vDirectActionsHow') . '
+                    ' . $this->vDirectActionsHow . '
                 </td>
             </tr>
             <tr>
                 <td>
                     <b>Wanneer moest dit van de melder uiterlijk opgelost zijn? </b>
-                    ' . $this->get('dtDirectActionsWhen') . '
+                    ' . $this->dtDirectActionsWhen . '
                 </td>
             </tr>
 
@@ -334,7 +334,7 @@ class IncidentReport extends Report {
         ';
 
         // Follow Up Actions in case of a follow up
-        if(count($this->get('aFollowUpActions')) > 0) {
+        if(count($this->aFollowUpActions) > 0) {
             $vContentHTML .= $this->getFollowUpActionsHTML();
         }
 
