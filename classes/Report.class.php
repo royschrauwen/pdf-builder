@@ -69,8 +69,11 @@ abstract class Report {
     }
 
     public static function createListFromArray(array $array){
+        $returnHTML = "";
+
         if(count($array) == 1) {
             foreach ($array as $item) {
+
                 $returnHTML = $item;
             }
         }

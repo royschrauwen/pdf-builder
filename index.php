@@ -26,7 +26,7 @@ require_once __DIR__ . '/classes/PDFExport.class.php';
 
 
 // Different PDF Export Templates
-//(new PDFExport(new Inspection(json_encode(file_get_contents(__DIR__ . '/includes/DummyInspection.json')))))->create(PDFExport::OUTPUT_INLINE);
+(new PDFExport(new Inspection(json_encode(file_get_contents(__DIR__ . '/includes/DummyInspection.json')))))->create(PDFExport::OUTPUT_INLINE);
 //(new PDFExport(new ExternalEvaluation(json_encode(file_get_contents(__DIR__ . '/includes/DummyEvaluation.json')))))->create(PDFExport::OUTPUT_INLINE);
 //(new PDFExport(new InternalEvaluation(json_encode(file_get_contents(__DIR__ . '/includes/DummyEvaluation.json')))))->create(PDFExport::OUTPUT_INLINE);
-(new PDFExport(new IncidentReport(json_encode(file_get_contents(__DIR__ . '/includes/DummyIncidentJson.json')))))->create(PDFExport::OUTPUT_INLINE);
+//(new PDFExport(new IncidentReport(json_encode(file_get_contents(__DIR__ . '/includes/DummyIncidentJson.json')))))->create(PDFExport::OUTPUT_INLINE);

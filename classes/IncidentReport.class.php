@@ -1,7 +1,15 @@
 <?php
+
 /**
  * EQUANS PDF IncidentReport
  *
+ * @property array|mixed|null $vWitnessType
+ * @property array|mixed|null $vWitnessName
+ * @property false|string $dtInjuredAbsenceEnd
+ * @property false|string $dtInjuredAbsenceStart
+ * @property array|mixed|null $vInjuredConsequences
+ * @property array|mixed|null $vInjuredInjuryType
+ * @property array|mixed|null $vInjuredPersonType
  * @copyright  2022 Aptic
  * @version    Release: 0.1.0
  * @since      Class available since Release 0.1.0
@@ -34,34 +42,8 @@ class IncidentReport extends Report {
     protected ?array $aDirectActionsWho;
     protected ?string $vDirectActionsHow;
     protected ?string $dtDirectActionsWhen;
-    /**
-     * @var array|mixed|null
-     */
-    private $vWitnessType;
-    /**
-     * @var array|mixed|null
-     */
-    private $vWitnessName;
-    /**
-     * @var false|string
-     */
-    private $dtInjuredAbsenceEnd;
-    /**
-     * @var false|string
-     */
-    private $dtInjuredAbsenceStart;
-    /**
-     * @var array|mixed|null
-     */
-    private $vInjuredConsequences;
-    /**
-     * @var array|mixed|null
-     */
-    private $vInjuredInjuryType;
-    /**
-     * @var array|mixed|null
-     */
-    private $vInjuredPersonType;
+
+
     /**
      * @var array|mixed|string
      */
