@@ -33,7 +33,6 @@ table {
   padding-bottom: 1.5rem;
 }
 
-.rapport-afbeeldingen,
 .report-images {
   page-break-inside: auto;
   vertical-align: top;
@@ -82,3 +81,10 @@ table {
   /* background-color: orange; */
   padding-left: 1rem;
 }
+
+.colleagues-list
+ {
+  list-style: none;
+  padding-left: 0;
+}
+

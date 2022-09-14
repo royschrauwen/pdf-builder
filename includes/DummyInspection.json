@@ -1,0 +1,865 @@
+{
+  "_id": 2021000416,
+  "amdSt": 0,
+  "amdId": 2021000416,
+  "amdTs": 1663054038,
+  "department": 1008,
+  "tsReportStarted": 1618317421,
+  "tsDate": 1618317420,
+  "tsStartOfDay": 1618264860,
+  "reportType": 9,
+  "creator": {
+    "id": 1001,
+    "email": "sjoerd@aptic.nl",
+    "name": "Sjoerd Tomassen",
+    "dsDN": "",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "0612345678"
+  },
+  "location": {
+    "clientName": "Klantnaam",
+    "coordinates": [
+      37.33233141,
+      -122.0312186,
+      5
+    ],
+    "spot": "Locatiebeschrijving"
+  },
+  "informSupervisor": [],
+  "supervisor": {
+    "id": 1001,
+    "email": "sjoerd@aptic.nl",
+    "name": "Sjoerd Tomassen",
+    "dsDN": "",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "0612345678"
+  },
+  "informProjectLeader": [],
+  "projectLeader": {
+    "id": 1001,
+    "email": "sjoerd@aptic.nl",
+    "name": "Sjoerd Tomassen",
+    "dsDN": "",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "0612345678"
+  },
+  "informedColleagues": [
+    {
+      "id": 1001,
+      "email": "sjoerd@aptic.nl",
+      "name": "Sjoerd Tomassen",
+      "dsDN": "",
+      "cip": "",
+      "department": {
+        "branch": {
+          "id": 1008,
+          "name": "ENGIE Services Noord B.V."
+        },
+        "type": "internal"
+      },
+      "phoneNumber": "0612345678"
+    }
+  ],
+  "isReportedOnBehalfOf": [],
+  "presentColleagues": [],
+  "themes": {
+    "1": {
+      "findings": [
+        null,
+        {
+          "description": "Omschrijving PBM1",
+          "evidence": {
+            "photo": [
+              "https://placedog.net/400/300",
+              "https://placedog.net/800/600"
+            ],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            },
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 2",
+              "department": 102,
+              "cip": ""
+            }
+          ],
+          "directActions": "Computer opnieuw opgestart",
+          "actions": [
+            {
+              "showAction": true,
+              "correction": {
+                "correction": true,
+                "correcting": false
+              },
+              "actionType": "internal",
+              "description": "actie 1",
+              "informColleague": false,
+              "colleague": {
+                "id": 1044,
+                "phoneNumber": "",
+                "email": "joris@aptic.nl",
+                "dsDN": "",
+                "cip": "",
+                "department": {
+                  "branch": {
+                    "id": 1008,
+                    "name": "EQUANS Services Noord B.V."
+                  },
+                  "type": "internal"
+                },
+                "name": "Joris'O de O\"Wit"
+              },
+              "linkedColleague": {
+                "id": 1044,
+                "dsDN": "",
+                "name": "Joris'O de O\"Wit",
+                "email": "joris@aptic.nl",
+                "department": {
+                  "branch": {
+                    "id": 1008,
+                    "name": "EQUANS Services Noord B.V."
+                  },
+                  "type": "internal"
+                },
+                "cip": ""
+              },
+              "tsPlanned": 1663365600,
+              "note": [],
+              "tsCreated": 1663052412
+            },
+            {
+              "showAction": true,
+              "correction": {
+                "correction": false,
+                "correcting": true
+              },
+              "actionType": "external",
+              "description": "actie 2",
+              "informColleague": false,
+              "colleague": {
+                "id": 0,
+                "dsDN": "",
+                "cip": "",
+                "name": "Joris",
+                "email": "joris@aptic.nl",
+                "phoneNumber": "",
+                "department": {
+                  "branch": {
+                    "id": 0,
+                    "name": "Aptic"
+                  },
+                  "type": "external"
+                }
+              },
+              "linkedColleague": {
+                "id": 1044,
+                "dsDN": "",
+                "name": "Joris'O de O\"Wit",
+                "email": "joris@aptic.nl",
+                "department": {
+                  "branch": {
+                    "id": 1008,
+                    "name": "EQUANS Services Noord B.V."
+                  },
+                  "type": "internal"
+                },
+                "cip": ""
+              },
+              "tsPlanned": 1663452000,
+              "note": [],
+              "tsCreated": 1663052412
+            }
+          ],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM3",
+          "evidence": {
+            "photo": [
+              "https://placedog.net/600/450"
+            ],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM2",
+          "evidence": {
+            "photo": [
+              "https://placedog.net/400/300",
+              "https://placedog.net/800/600"
+            ],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving PBM4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Naam collega 1",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        }
+      ],
+      "findingCount": 16
+    },
+    "2": {
+      "findings": [
+        null,
+        {
+          "description": "Omschrijving Nood1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood1",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood2",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood3",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        },
+        {
+          "description": "Omschrijving Nood4",
+          "evidence": {
+            "photo": [],
+            "audio": []
+          },
+          "colleagues": [
+            {
+              "id": 0,
+              "email": "",
+              "dsDN": "",
+              "name": "Met wie gesproken 2",
+              "department": null,
+              "cip": ""
+            }
+          ],
+          "directActions": "",
+          "actions": [],
+          "type": 0
+        }
+      ],
+      "findingCount": 16
+    }
+  },
+  "user": {
+    "id": 1001,
+    "email": "sjoerd@aptic.nl",
+    "name": "Sjoerd Tomassen",
+    "dsDN": "",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "0612345678"
+  },
+  "timestamps": {
+    "submitted": 1618317506,
+    "edited": 1663054038,
+    "verified": null,
+    "inProgress": null,
+    "deleted": null
+  },
+  "projectNameNumber": "project Name en Number",
+  "isManaged": true
+}

@@ -7,96 +7,42 @@
  * @since      Class available since Release 0.1.0
  */ 
 abstract class Evaluation extends Report {
-    
-    protected ?string $vWorkingTitle;
-    protected ?string $idReport;
-    protected ?string $dtDateTime;
-    protected ?string $vDepartment;
-    protected ?string $vReportedByName;
-    protected ?string $vReportedByPhone;
-    protected ?string $vReportedByEmail;
-    protected ?string $vCause;
-    protected ?string $vReference;
-    protected ?string $vCustomerInternal;
-    protected ?string $vDescription;
-    protected ?string $vNorm;
-    protected ?string $vNormParagraph;
-    protected ?string $vProcess;
-    protected ?string $vImpactLevel;
-    protected ?string $vSegment;
-    protected ?string $vProjectNameNumber;
-    protected ?string $vClientName;
-    protected ?array  $aImages;
-    protected ?string $vCauseDescription;
-    protected ?string $vCauseAnalysis;
-    protected ?string $vSizeAnalysis;
-    protected ?string $vHowShouldBeSolved;
-    protected ?string $vActionsTaken;
-    protected ?string $vPlanningDate;
-    protected ?array  $aFollowUpActions;
-    protected ?string $vEffectiveness;
 
-    function __construct(
-        string $vWorkingTitle,
-        string $idReport,
-        string $dtDateTime,
-        string $vDepartment,
-        string $vReportedByName,
-        string $vReportedByPhone,
-        string $vReportedByEmail,
-        string $vCause,
-        string $vReference,
-        string $vCustomerInternal,
-        string $vDescription,
-        string $vNorm,
-        string $vNormParagraph,
-        string $vProcess,
-        string $vImpactLevel,
-        string $vSegment,
-        string $vProjectNameNumber,
-        string $vClientName,
-        array  $aImages,
-        string $vCauseDescription,
-        string $vCauseAnalysis,
-        string $vSizeAnalysis,
-        string $vHowShouldBeSolved,
-        string $vActionsTaken,
-        string $vPlanningDate,
-        array  $aFollowUpActions,
-        string $vEffectiveness
-    ) {
 
-        $this->vWorkingTitle = $vWorkingTitle;
-        $this->idReport = $idReport;
-        $this->vType = $vType;
-        $this->dtDateTime = $dtDateTime;
-        $this->vDepartment = $vDepartment;
-        $this->vReportedByName = $vReportedByName;
-        $this->vReportedByPhone = $vReportedByPhone;
-        $this->vReportedByEmail = $vReportedByEmail;
-        $this->vCause = $vCause;
-        $this->vReference = $vReference;
-        $this->vCustomerInternal = $vCustomerInternal;
-        $this->vDescription = $vDescription;
-        $this->vNorm = $vNorm;
-        $this->vNormParagraph = $vNormParagraph;
-        $this->vProcess = $vProcess;
-        $this->vImpactLevel = $vImpactLevel;
-        $this->vSegment = $vSegment;
-        $this->vProjectNameNumber = $vProjectNameNumber;
-        $this->vClientName = $vClientName;
-        $this->aImages = $aImages;
-        $this->vCauseDescription = $vCauseDescription;
-        $this->vCauseAnalysis = $vCauseAnalysis;
-        $this->vSizeAnalysis = $vSizeAnalysis;
-        $this->vHowShouldBeSolved = $vHowShouldBeSolved;
-        $this->vActionsTaken = $vActionsTaken;
-        $this->vPlanningDate = $vPlanningDate;
-        $this->aFollowUpActions = $aFollowUpActions;
-        $this->vEffectiveness = $vEffectiveness;
+    function __construct(string $jsonData) {
+
+        $reportData = json_decode(json_decode($jsonData), true);
+
+        $this->vWorkingTitle = SJAQuery::get($reportData, 'workingTitle') ?? " ";
+        $this->idReport = SJAQuery::get($reportData, '_id') ?? 0;
+        $this->vType = SJAQuery::get($reportData, 'reportType') ?? 0;
+        $this->dtDateTime = SJAQuery::get($reportData, 'tsDate') ? date('d-m-Y H:i', SJAQuery::get($reportData, 'tsDate')) : "-";
+        $this->vDepartment = SJAQuery::get($reportData, 'department') ?? 0;
+        $this->vReportedByName = SJAQuery::get($reportData, 'creator.name') ?? "";
+        $this->vReportedByPhone = SJAQuery::get($reportData, 'creator.phoneNumber') ?? "";
+        $this->vReportedByEmail = SJAQuery::get($reportData, 'creator.email') ?? "";
+        $this->vCause = SJAQuery::get($reportData, 'reason') ?? "";
+        $this->vReference = SJAQuery::get($reportData, 'reference') ?? "";
+        $this->vCustomerInternal = SJAQuery::get($reportData, 'customerInternal') ?? "";
+        $this->vDescription = SJAQuery::get($reportData, 'description') ?? "";
+        $this->vNorm = SJAQuery::get($reportData, 'norm') ?? "";
+        $this->vNormParagraph = SJAQuery::get($reportData, 'normParagraph') ?? "";
+        $this->aProcess = SJAQuery::get($reportData, 'process.list') ?? "";
+        $this->vImpactLevel = SJAQuery::get($reportData, 'impactLevel') ?? "";
+        $this->vSegment = SJAQuery::get($reportData, 'segment') ?? "";
+        $this->vProjectNameNumber = SJAQuery::get($reportData, 'projectNameNumber') ?? "";
+        $this->vClientName = SJAQuery::get($reportData, 'location.clientName') ?? "";
+        $this->aImages = SJAQuery::get($reportData, 'evidence.photo') ?? "";
+        $this->vCauseDescription = SJAQuery::get($reportData, 'directCause') ?? "";
+        $this->vCauseAnalysis = SJAQuery::get($reportData, 'directCause') ?? "";
+        $this->vSizeAnalysis = SJAQuery::get($reportData, 'sizeAnalysis') ?? "";
+        $this->vHowShouldBeSolved = SJAQuery::get($reportData, 'howShouldBeSolved') ?? "";
+        $this->vActionsTaken = SJAQuery::get($reportData, 'actionsTaken') ?? "";
+        $this->dtPlanningDate = SJAQuery::get($reportData, 'tsPlanned') ? date('d-m-Y', SJAQuery::get($reportData, 'tsPlanned')) : "-";
+        $this->aFollowUpActions = SJAQuery::get($reportData, 'findings.actions') ?? "";
+        $this->vEffectiveness = SJAQuery::get($reportData, 'impactLevel') ?? "";
 
     }
 
     
 }
-?>

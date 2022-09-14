@@ -94,7 +94,7 @@ class IncidentReport extends Report {
         $this->aFollowUpActions = SJAQuery::get($reportData, 'actions') ?? "";
     }
 
-    /** Converts a boolean value to Ja or Nee */
+    /** Converts a boolean value to Yes or No */
     protected function booleanToYesNo(bool $bValue): string {
         return $bValue ? 'Ja' : 'Nee';
     }
@@ -188,7 +188,7 @@ class IncidentReport extends Report {
                         <b > Gevolg: </b > ';
 
 
-                $this->aInjured[$i]['consequences'] ? $vContentHTML .= Report::createListFromArray($this->aInjured[$i]['consequences']) : '';
+                $vContentHTML .= $this->aInjured[$i]['consequences'] ? Report::createListFromArray($this->aInjured[$i]['consequences']) : '';
 
 
                 $vContentHTML .= '</td >
@@ -377,7 +377,7 @@ class IncidentReport extends Report {
 
         ';
 
-        // Follow Up Actions in case of a follow up
+        // Follow-Up Actions in case of a follow-up
         if(count($this->aFollowUpActions) > 0) {
             $vContentHTML .= $this->getFollowUpActionsHTML();
         }
@@ -385,4 +385,3 @@ class IncidentReport extends Report {
         return $vContentHTML;
     }
 }
-?>

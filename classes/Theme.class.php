@@ -8,21 +8,34 @@
  */ 
 class Theme {
 
-
+    private string $vThemeName;
+    private array $aFindings;
 
     function __construct(
         string $vThemeName,
-        array $aFindings,
+        array $aFindings
     )
     {
 
         $this->vThemeName = $vThemeName;
-        $this->aFindings = $aFindings;
+        foreach($aFindings as $finding){
+            if(isset($finding)) {
+                $newFinding = new Finding(
+                    $finding['description'],
+                    $finding['type'],
+                    $finding['colleagues'],
+                    $finding['evidence']['photo'],
+                    $finding['directActions'],
+                    $finding['actions']
+                );
+                $this->aFindings[] = $newFinding;
+            }
+        }
 
     }
 
 
-    private string $vThemeName;
+
 
     /**
      * @return string
@@ -39,8 +52,9 @@ class Theme {
     {
         return $this->aFindings;
     }
-    private array  $aFindings;
 
-
+    public function printTeamName() : string {
+        return '<p class="inspection-theme-header"><b>Thema: ' . $this->getThemeName() . '</b></p>';
+    }
 
 }

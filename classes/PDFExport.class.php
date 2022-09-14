@@ -1,4 +1,9 @@
 <?php
+
+use Mpdf\HTMLParserMode;
+use Mpdf\Mpdf;
+use Mpdf\MpdfException;
+
 /**
  * EQUANS PDF Exporter
  *
@@ -15,31 +20,29 @@ const OUTPUT_INLINE = "I";
 const OUTPUT_FILE= "F";
 const OUTPUT_STRING = "S";
 
-private $mpdf;
-private $defaultDestination = "I";
-private $vReportCreator = 'EQUANS';
+private Mpdf $mpdf;
+private string $defaultDestination = "I";
 
-private $vReportTitleParameter = 'idReport';
-private $vReportFileNameParamater = 'idReport';
-private $vReportAuthorParameter = 'vDepartment';
-private $vReportSubjectParameter = 'vWorkingTitle';
+private string $vReportCreator = 'EQUANS';
 
-private $vStylingFileLocation = 'style\report.css';
+private string $vStylingFileLocation = 'style\report.css';
 
 private Report $report;
 
 
 public function __construct(
-    Report $report,
+    Report $report
     ) {
         $this->report = $report;
     // Create PDF using the mPDF library
-    $this->mpdf = new \Mpdf\Mpdf([
-        'setAutoTopMargin' => 'stretch', 
-        'setAutoBottomMargin' => 'stretch'
-    ]);
+    try {
+        $this->mpdf = new Mpdf([
+            'setAutoTopMargin' => 'stretch',
+            'setAutoBottomMargin' => 'stretch'
+        ]);
+    } catch (MpdfException $e) {
+    }
 }
-
 
 /**
  * Creates the PDF file and exports it to the browser.
@@ -55,14 +58,14 @@ public function create(string $destination = null) : void {
     try {
 
         // Set metadata
-        $this->mpdf->SetTitle($this->report->get($this->vReportTitleParameter));
-        $this->mpdf->SetAuthor($this->report->get($this->vReportAuthorParameter));
+        $this->mpdf->SetTitle($this->report->getIdReport() . '.pdf');
+        $this->mpdf->SetAuthor($this->report->getDepartment());
         $this->mpdf->SetCreator($this->vReportCreator);
-        $this->mpdf->SetSubject($this->report->get($this->vReportSubjectParameter));
+        $this->mpdf->SetSubject($this->report->getWorkingTitle());
 
         // Import styling
         $stylesheet = file_get_contents($this->vStylingFileLocation);
-        $this->mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+        $this->mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
 
         // Add HTML content
         $this->mpdf->SetHTMLHeader($this->report->getHeaderHTML());
@@ -76,9 +79,9 @@ public function create(string $destination = null) : void {
         }
 
         // Export the PDF
-        $this->mpdf->Output($this->report->get($this->vReportFileNameParamater).'.pdf', $destination);    
+        $this->mpdf->Output($this->report->getIdReport().'.pdf', $destination);
 
-    } catch (\Mpdf\MpdfException $e) { // Note: safer fully qualified exception name used for catch
+    } catch (MpdfException $e) { // Note: safer fully qualified exception name used for catch
         // Process the exception, log, print etc.
         echo $e->getMessage();
     }

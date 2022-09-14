@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection ALL */
+/** @noinspection PhpArrayAccessCanBeReplacedWithForeachValueInspection */
 //namespace Aptic;
 
 /**

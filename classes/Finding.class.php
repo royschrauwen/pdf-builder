@@ -10,29 +10,41 @@
 class Finding {
 
     private string $vDescription;
-    private string $vType;
-    private string $vCollegues;
-    private string $vDepartment;
-    private array  $aImages;
+    private int $vType;
+    private array $aColleagues;
+    private array $aImages;
     private string $vActionsTaken;
-    private array  $aFollowUpActions;
+    private array $aFollowUpActions = [];
 
     function __construct(
         string $vDescription,
         string $vType,
-        string $vCollegues,
-        string $vDepartment,
-        array  $aImages,
+        array  $aColleagues,
+        ?array $aImages,
         string $vActionsTaken,
-        array  $aFollowUpActions,
+        array  $aFollowUpActions
     ) {
         $this->vDescription = $vDescription;
         $this->vType = $vType;
-        $this->vCollegues = $vCollegues;
-        $this->vDepartment = $vDepartment;
+        $this->aColleagues = $aColleagues;
         $this->aImages = $aImages;
-        $this->vActionsTaken = $vActionsTaken;
-        $this->aFollowUpActions = $aFollowUpActions;
+        $this->vActionsTaken = $vActionsTaken ?? "-";
+
+
+            foreach ($aFollowUpActions as $fua) {
+                if (isset($fua)) {
+                    $newFuA = new FollowUpAction(
+                        $fua['description'],
+                        $fua['actionType'],
+                        $fua['colleague']['name'],
+                        $fua['linkedColleague']['name'],
+                        $fua['tsPlanned']
+                    );
+                    $this->aFollowUpActions[] = $newFuA;
+                }
+            }
+
+
     }
 
     /**
@@ -46,7 +58,7 @@ class Finding {
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType(): int
     {
         return $this->vType;
     }
@@ -54,18 +66,29 @@ class Finding {
     /**
      * @return string
      */
-    public function getCollegues(): string
+    public function getColleagues(): array
     {
-        return $this->vCollegues;
+        return $this->aColleagues;
     }
 
-    /**
-     * @return string
-     */
-    public function getDepartment(): string
+    public function printColleguesAndDepartments() : string
     {
-        return $this->vDepartment;
+
+        $returnData = '<ul class="colleagues-list">';
+        for($i=0;$i<count($this->getColleagues());$i++){
+            $returnData .= '<li>';
+            $returnData .= $this->getColleagues()[$i]['name'];
+            if($this->getColleagues()[$i]['department']) {
+                $returnData .= ' - ';
+                $returnData .= $this->getColleagues()[$i]['department'];
+            }
+            $returnData .= '</li>';
+        }
+        $returnData .= '</ul>';
+        return $returnData;
     }
+
+
 
     /**
      * @return array

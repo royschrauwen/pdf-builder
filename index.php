@@ -3,11 +3,10 @@
 // Required for mPDF / Composer
 require_once __DIR__ . '/vendor/autoload.php';
 
-// I don't know how autoloaders work yet... '^_^
-
+// Included here but has to be replaced with the correct one
 require_once __DIR__ . '/includes/sjaquery.php';
 
-
+// All classes needed for the PDF Export
 require_once __DIR__ . '/classes/Report.class.php';
 require_once __DIR__ . '/classes/IncidentReport.class.php';
 require_once __DIR__ . '/classes/Evaluation.class.php';
@@ -24,17 +23,10 @@ require_once __DIR__ . '/classes/PDFExport.class.php';
 //include_once 'includes/dummyDataInternalEvaluation.inc.php';
 //include_once 'includes/dummyDataExternalEvaluation.inc.php';
 //include_once 'includes/dummyDataInspection.inc.php';
-//include_once 'includes/dummyDataIncidentReport.inc.php';
-include_once 'includes/dummyDataIncidentReportv2.inc.php';
 
 
-// All three below are used for a different report templating structure
-
-// (new PDFExport($oInternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
-// (new PDFExport($oExternalEvaluation))->create(PDFExport::OUTPUT_INLINE);
-//(new PDFExport($oInspection))->create(PDFExport::OUTPUT_INLINE);
-// (new PDFExport($oIndicentReport))->create(PDFExport::OUTPUT_INLINE);
- (new PDFExport($oIndicentReport2))->create(PDFExport::OUTPUT_INLINE);
-
-
-?>
+// Different PDF Export Templates
+(new PDFExport(new Inspection(json_encode(file_get_contents(__DIR__ . '/includes/DummyInspection.json')))))->create(PDFExport::OUTPUT_INLINE);
+//(new PDFExport(new ExternalEvaluation(json_encode(file_get_contents(__DIR__ . '/includes/DummyEvaluation.json')))))->create(PDFExport::OUTPUT_INLINE);
+//(new PDFExport(new InternalEvaluation(json_encode(file_get_contents(__DIR__ . '/includes/DummyEvaluation.json')))))->create(PDFExport::OUTPUT_INLINE);
+//(new PDFExport(new IncidentReport(json_encode(file_get_contents(__DIR__ . '/includes/DummyIncidentJson.json')))))->create(PDFExport::OUTPUT_INLINE);

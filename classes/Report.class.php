@@ -10,7 +10,7 @@
 
 abstract class Report {
 
-    protected ?string $vWorkingTitle;
+    protected ?string $vWorkingTitle = '';
     protected ?string $idReport;
     protected ?int $vType;
     protected ?string $dtDateTime;
@@ -24,7 +24,7 @@ abstract class Report {
     protected ?string $vDescription;
     protected ?string $vNorm;
     protected ?string $vNormParagraph;
-    protected ?string $vProcess;
+    protected ?array $aProcess;
     protected ?string $vImpactLevel;
     protected ?string $vSegment;
     protected ?string $vProjectNameNumber;
@@ -35,68 +35,68 @@ abstract class Report {
     protected ?string $vSizeAnalysis;
     protected ?string $vHowShouldBeSolved;
     protected ?string $vActionsTaken;
-    protected ?string $vPlanningDate;
+    protected ?string $dtPlanningDate;
     protected ?array $aFollowUpActions;
     protected ?string $vEffectiveness;
     
     function __construct (
-        string $vWorkingTitle,
-        string $idReport,
-        string $vType,
-        string $dtDateTime,
-        string $vDepartment,
-        string $vReportedByName,
-        string $vReportedByPhone,
-        string $vReportedByEmail,
-        string $vCause,
-        string $vReference,
-        string $vCustomerInternal,
-        string $vDescription,
-        string $vNorm,
-        string $vNormParagraph,
-        string $vProcess,
-        string $vImpactLevel,
-        string $vSegment,
-        string $vProjectNameNumber,
-        string $vClientName,
-        array  $aImages,
-        string $vCauseDescription,
-        string $vCauseAnalysis,
-        string $vSizeAnalysis,
-        string $vHowShouldBeSolved,
-        string $vActionsTaken,
-        string $vPlanningDate,
-        array  $aFollowUpActions,
-        string $vEffectiveness
+//        string $vWorkingTitle,
+//        string $idReport,
+//        string $vType,
+//        string $dtDateTime,
+//        string $vDepartment,
+//        string $vReportedByName,
+//        string $vReportedByPhone,
+//        string $vReportedByEmail,
+//        string $vCause,
+//        string $vReference,
+//        string $vCustomerInternal,
+//        string $vDescription,
+//        string $vNorm,
+//        string $vNormParagraph,
+//        string $vProcess,
+//        string $vImpactLevel,
+//        string $vSegment,
+//        string $vProjectNameNumber,
+//        string $vClientName,
+//        array  $aImages,
+//        string $vCauseDescription,
+//        string $vCauseAnalysis,
+//        string $vSizeAnalysis,
+//        string $vHowShouldBeSolved,
+//        string $vActionsTaken,
+//        string $vPlanningDate,
+//        array  $aFollowUpActions,
+//        string $vEffectiveness
     ) {
-        $this->vWorkingTitle = $vWorkingTitle;
-        $this->idReport = $idReport;
-        $this->vType = $vType;
-        $this->dtDateTime = $dtDateTime;
-        $this->vDepartment = $vDepartment;
-        $this->vReportedByName = $vReportedByName;
-        $this->vReportedByPhone = $vReportedByPhone;
-        $this->vReportedByEmail = $vReportedByEmail;
-        $this->vCause = $vCause;
-        $this->vReference = $vReference;
-        $this->vCustomerInternal = $vCustomerInternal;
-        $this->vDescription = $vDescription;
-        $this->vNorm = $vNorm;
-        $this->vNormParagraph = $vNormParagraph;
-        $this->vProcess = $vProcess;
-        $this->vImpactLevel = $vImpactLevel;
-        $this->vSegment = $vSegment;
-        $this->vProjectNameNumber = $vProjectNameNumber;
-        $this->vClientName = $vClientName;
-        $this->aImages = $aImages;
-        $this->vCauseDescription = $vCauseDescription;
-        $this->vCauseAnalysis = $vCauseAnalysis;
-        $this->vSizeAnalysis = $vSizeAnalysis;
-        $this->vHowShouldBeSolved = $vHowShouldBeSolved;
-        $this->vActionsTaken = $vActionsTaken;
-        $this->vPlanningDate = $vPlanningDate;
-        $this->aFollowUpActions = $aFollowUpActions;
-        $this->vEffectivenes = $vEffectiveness;
+//        $this->vWorkingTitle = $vWorkingTitle;
+//        $this->idReport = $idReport;
+//        $this->vType = $vType;
+//        $this->dtDateTime = $dtDateTime;
+//        $this->vDepartment = $vDepartment;
+//        $this->vReportedByName = $vReportedByName;
+//        $this->vReportedByPhone = $vReportedByPhone;
+//        $this->vReportedByEmail = $vReportedByEmail;
+//        $this->vCause = $vCause;
+//        $this->vReference = $vReference;
+//        $this->vCustomerInternal = $vCustomerInternal;
+//        $this->vDescription = $vDescription;
+//        $this->vNorm = $vNorm;
+//        $this->vNormParagraph = $vNormParagraph;
+//        $this->vProcess = $vProcess;
+//        $this->vImpactLevel = $vImpactLevel;
+//        $this->vSegment = $vSegment;
+//        $this->vProjectNameNumber = $vProjectNameNumber;
+//        $this->vClientName = $vClientName;
+//        $this->aImages = $aImages;
+//        $this->vCauseDescription = $vCauseDescription;
+//        $this->vCauseAnalysis = $vCauseAnalysis;
+//        $this->vSizeAnalysis = $vSizeAnalysis;
+//        $this->vHowShouldBeSolved = $vHowShouldBeSolved;
+//        $this->vActionsTaken = $vActionsTaken;
+//        $this->vPlanningDate = $vPlanningDate;
+//        $this->aFollowUpActions = $aFollowUpActions;
+//        $this->vEffectivenes = $vEffectiveness;
     }
 
     abstract public function getHeaderHTML(): string;
@@ -104,27 +104,56 @@ abstract class Report {
     abstract public function getContentHTML(): string;
 
     /**
-     * Get's the value of an object's property.
-     *
-     * @param string $property The property to be retreived
-     * @return mixed|null The value of the requested property | The property does not exist on this object
+     * @return string|null
      */
-    public function get(string $property) : mixed
+    public function getIdReport(): ?string
     {
-        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : null;
+        return $this->idReport;
     }
 
-    
     /**
-     * Set's the value for an property from the calling object.
-     *
-     * @param string $property The property to be set
-     * @param mixed The value to be set
+     * @return string|null
      */
-    public function set(string $property, mixed $value)
+    public function getWorkingTitle(): ?string
     {
-        $this->{$property} = $value;
+        return $this->vWorkingTitle;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getDepartment(): ?string
+    {
+        return $this->vDepartment;
+    }
+
+
+
+
+
+
+//    /**
+//     * Get's the value of an object's property.
+//     *
+//     * @param string $property The property to be retreived
+//     * @return mixed|null The value of the requested property | The property does not exist on this object
+//     */
+//    public function get(string $property) : mixed
+//    {
+//        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : null;
+//    }
+//
+//
+//    /**
+//     * Set's the value for a property from the calling object.
+//     *
+//     * @param string $property The property to be set
+//     * @param mixed $value The value to be set
+//     */
+//    public function set(string $property, mixed $value)
+//    {
+//        $this->{$property} = $value;
+//    }
 
 
     public static function createListFromArray(array $array){
@@ -160,9 +189,9 @@ abstract class Report {
             $vImageHTML .= '<tr>';
             foreach ($row as $value) { 
                 $vImageHTML .= 
-                '<td><center>
+                '<td>
                     <img class="rapport-afbeelding" src="' . $value . '" alt="">
-                </center></td>';
+                </td>';
             } 
             $vImageHTML .= '</tr>';
         }
@@ -172,9 +201,9 @@ abstract class Report {
     }
 
     /**
-     * Generates the HTML for Follow Up Actions
+     * Generates the HTML for Follow-Up Actions
      *
-     * @return string $imageHTML The Follow Up Actions, formatted in HTML
+     * @return string $imageHTML The Follow-Up Actions, formatted in HTML
      */
     public function getFollowUpActionsHTML() : string {
 

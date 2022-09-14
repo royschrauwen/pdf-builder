@@ -1,0 +1,204 @@
+{
+  "_id": 2021000455,
+  "amdSt": 0,
+  "amdId": 2021000455,
+  "amdTs": 1663052594,
+  "reportSpec": 1015,
+  "reportType": 1,
+  "creator": {
+    "id": 1044,
+    "email": "joris@aptic.nl",
+    "dsDN": "",
+    "name": "Joris'O de O\"Wit",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": "06 123 456 78"
+  },
+  "location": {
+    "coordinates": [],
+    "spot": "asdf",
+    "clientName": "asdf"
+  },
+  "tsDate": 1616756940,
+  "tsReportStarted": "1616756966",
+  "description": "nieuw rapporttt",
+  "evidence": {
+    "photo": [],
+    "audio": []
+  },
+  "needsActions": true,
+  "user": {
+    "id": 1044,
+    "email": "joris@aptic.nl",
+    "dsDN": "",
+    "name": "Joris'O de O\"Wit",
+    "cip": "",
+    "department": {
+      "branch": {
+        "id": 1008,
+        "name": "ENGIE Services Noord B.V."
+      },
+      "type": "internal"
+    },
+    "phoneNumber": ""
+  },
+  "department": 1008,
+  "timestamps": {
+    "submitted": 1616756966,
+    "edited": 1663052594,
+    "verified": null,
+    "inProgress": 1618343053,
+    "deleted": null
+  },
+  "projectNameNumber": "asdf",
+  "workingTitle": "dit is de werktitel",
+  "customerInternal": "customer",
+  "norm": "companySpecific",
+  "normParagraph": "asdf asdf asdf ",
+  "reference": "ref gfgsdfgd",
+  "findings": {
+    "actions": [
+      {
+        "actionType": "internal",
+        "description": "eval actie",
+        "colleague": {
+          "id": 1044,
+          "phoneNumber": "",
+          "email": "joris@aptic.nl",
+          "dsDN": "",
+          "cip": "",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "ENGIE Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "name": "Joris'O de O\"Wit"
+        },
+        "linkedColleague": {
+          "id": 1044,
+          "dsDN": "",
+          "name": "Joris'O de O\"Wit",
+          "email": "joris@aptic.nl",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "ENGIE Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "cip": "",
+          "phoneNumber": ""
+        },
+        "tsPlanned": 1618437600,
+        "tsCreated": 1618323702,
+        "tsManagerMailSent": 1618342920,
+        "tsReminderSent": 1618343053,
+        "tsDeleted": 1618506629,
+        "showAction": true,
+        "correction": {
+          "correction": false,
+          "correcting": false
+        },
+        "informColleague": false,
+        "note": []
+      },
+      {
+        "showAction": true,
+        "correction": {
+          "correction": false,
+          "correcting": false
+        },
+        "actionType": "internal",
+        "description": "open actie",
+        "informColleague": false,
+        "colleague": {
+          "id": 1044,
+          "phoneNumber": "",
+          "email": "joris@aptic.nl",
+          "dsDN": "",
+          "cip": "",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "EQUANS Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "name": "Joris'O de O\"Wit"
+        },
+        "linkedColleague": {
+          "id": 1044,
+          "dsDN": "",
+          "name": "Joris'O de O\"Wit",
+          "email": "joris@aptic.nl",
+          "department": {
+            "branch": {
+              "id": 1008,
+              "name": "EQUANS Services Noord B.V."
+            },
+            "type": "internal"
+          },
+          "cip": ""
+        },
+        "tsPlanned": 1663192800,
+        "note": [
+          {
+            "timestamp": 1663052586049,
+            "reporter": "Joris'O de O\"Wit",
+            "note": "note 1"
+          },
+          {
+            "timestamp": 1663052589113,
+            "reporter": "Joris'O de O\"Wit",
+            "note": "note 2"
+          }
+        ],
+        "tsCreated": 1663052594
+      }
+    ]
+  },
+  "process": {
+    "list": [
+      "companySpecific",
+      "hsse",
+      "finance",
+      "legal"
+    ]
+  },
+  "isManaged": true,
+  "reportedOnBehalfOf": {
+    "id": 1163,
+    "dsDN": "",
+    "cip": "",
+    "name": "asdf",
+    "email": "asdf",
+    "phoneNumber": "",
+    "department": {
+      "branch": {
+        "id": 0,
+        "name": "asdf"
+      },
+      "type": ""
+    }
+  },
+  "directCause": "sdfsdfsdf",
+  "actionsTaken": "sdfsdfsfs",
+  "expectedProfit": "1000-5000",
+  "positive-negative": "negative",
+  "theme": "cooperation",
+  "refinement": "information",
+  "reason": "INSP",
+  "impactLevel": "nv",
+  "segment": "not-applicable",
+  "tsPlanned": 1663452000,
+  "sizeAnalysis": "groot",
+  "howShouldBeSolved": "doe iets"
+}

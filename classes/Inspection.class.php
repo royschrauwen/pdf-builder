@@ -8,40 +8,38 @@
  */ 
 class Inspection extends Report {
 
-    protected ?string $idReport;
-    protected ?string $vDate;
-    protected ?string $vDepartment;
-    protected ?string $vReportedByName;
-    protected ?string $vReportedByPhone;
-    protected ?string $vPresentColleagues;
-    protected ?string $vProjectNameNumber;
-    protected ?string $vClientName;
-    protected ?string $vLocationDescription;
-    protected ?array  $aThemes;
+    protected ?array $aPresentColleagues;
+    /**
+     * @var false|string
+     */
+    private $vDate;
+    /**
+     * @var array|mixed|string
+     */
+    private $vLocationDescription;
+    /**
+     * @var array|mixed|string
+     */
+    private $aThemes;
 
-    function __construct(
-        string $idReport,
-        string $vDate,
-        string $vDepartment,
-        string $vReportedByName,
-        string $vReportedByPhone,
-        string $vPresentColleagues,
-        string $vProjectNameNumber,
-        string $vClientName,
-        string $vLocationDescription,
-        array  $aThemes,
-    ) {
-        $this->idReport = $idReport;
-        $this->vType = $vType;
-        $this->vDate = $vDate;
-        $this->vDepartment = $vDepartment;
-        $this->vReportedByName = $vReportedByName;
-        $this->vReportedByPhone = $vReportedByPhone;
-        $this->vPresentColleagues = $vPresentColleagues;
-        $this->vProjectNameNumber = $vProjectNameNumber;
-        $this->vClientName = $vClientName;
-        $this->vLocationDescription = $vLocationDescription;
-        $this->aThemes = $aThemes;
+    function __construct(string $jsonData)
+    {
+
+        $reportData = json_decode(json_decode($jsonData), true);
+
+        $this->vType = SJAQuery::get($reportData, 'reportType') ?? 0;
+
+
+        $this->idReport = SJAQuery::get($reportData, '_id') ?? 0;
+        $this->vDate = SJAQuery::get($reportData, 'tsDate') ? date('d-m-Y H:i', SJAQuery::get($reportData, 'tsDate')) : "-";
+        $this->vDepartment = SJAQuery::get($reportData, 'department') ?? 0;
+        $this->vReportedByName = SJAQuery::get($reportData, 'creator.name') ?? "";
+        $this->vReportedByPhone = SJAQuery::get($reportData, 'creator.phoneNumber') ?? "";
+        $this->aPresentColleagues = SJAQuery::get($reportData, 'presentColleagues') ?? "";
+        $this->vProjectNameNumber = SJAQuery::get($reportData, 'projectNameNumber') ?? "";
+        $this->vClientName = SJAQuery::get($reportData, 'location.clientName') ?? "";
+        $this->vLocationDescription = SJAQuery::get($reportData, 'location.spot') ?? "";
+        $this->aThemes = SJAQuery::get($reportData, 'themes') ?? "";
     }
 
 
@@ -82,7 +80,12 @@ class Inspection extends Report {
             <tr>
                 <td><b>Melder</b><br>' . $this->vReportedByName . '</td>
                 <td><b>Tel</b><br>' . $this->vReportedByPhone . '</td>
-                <td><b>Meegelopen</b><br>' . $this->vPresentColleagues . '</td>
+                <td><b>Meegelopen</b><br>';
+
+
+            $vContentHTML .= $this->aPresentColleagues ? Report::createListFromArray($this->aPresentColleagues) : '';
+
+        $vContentHTML .= '</td>
             </tr>
     
             <tr>
@@ -93,58 +96,149 @@ class Inspection extends Report {
         </table>
         ';
 
-        foreach ($this->aThemes as $theme) {
+//        var_dump($this->aThemes);
 
-            $vContentHTML .= '
-            <div class="inspection-theme">
-            <p class="inspection-theme-header"><b>Thema: ' . $theme->getThemeName() . '</b></p>
-            ';
-        
-        
+//        $vars = get_object_vars ( $this->aThemes );
+//        foreach($vars as $key=>$value) {
+//            var_dump($key);
+//            var_dump($value);
+//        }
+
+        foreach ($this->aThemes as $vThemeName=>$aThemeFindingsObject) {
+
+//            var_dump($this->aThemes);
+
+            $theme = new Theme($vThemeName, $aThemeFindingsObject['findings']);
+
+//            var_dump($theme);
+            $vContentHTML .= '<div class="inspection-theme">';
+            $vContentHTML .= $theme->printTeamName();
+
+//            var_dump($theme->getFindings());
+
             foreach ($theme->getFindings() as $finding) {
-                $vContentHTML .= '
+                if (isset($finding)) {
+                    $vContentHTML .= '
                 <div class="inspection-finding">
-        
+
                 <p><b>Omschrijving</b><br>' . $finding->getDescription() . '</p>
                 <p><b>Type</b><br>' . $finding->getType() . '</p>
-                <p><b>Gesproken met</b><br>' . $finding->getCollegues() . ' - ' . $finding->getDepartment() . '</p>
+                <p><b>Gesproken met</b>';
+                    $vContentHTML .= $finding->printColleguesAndDepartments();
+                    $vContentHTML .= '</p>
+           
                 </div>
                 ';
-    
-                // Images indien aanwezig
-                if(count($finding->getImages()) > 0) {
 
-                    $vContentHTML .= '<table class="report-images">';
-                    $vContentHTML .= '<tr>';
+                    // Images indien aanwezig
+                    if (count($finding->getImages()) > 0) {
 
-                    for ($i=0; $i < count($finding->getImages()); $i++) {
-                        $vContentHTML .= "<td><center><img class='rapport-afbeelding' alt='' src='" . $finding->getImages()[$i] . "'></center></td>";
+                        $vContentHTML .= '<table class="report-images">';
+                        $vContentHTML .= '<tr>';
+
+                        for ($i = 0; $i < count($finding->getImages()); $i++) {
+                            $vContentHTML .= "<td><img class='rapport-afbeelding' alt='' src='" . $finding->getImages()[$i] . "'></td>";
+                        }
+
+                        $vContentHTML .= '</tr>';
+                        $vContentHTML .= '</table>';
                     }
 
-                    $vContentHTML .= '</tr>';
-                    $vContentHTML .= '</table>';
+
                 }
+
 
                 $vContentHTML .= '
                         <div class="inspection-finding">
-                
-                        <p><b>Reeds genomen acties</b><br>' . $finding->getActionsTaken() . '</p>';
-    
-        
-                // Vervolgacties indien aanwezig
-                if(count($finding->getFollowUpActions()) > 0) {
 
-                    $vContentHTML .= '
+                        <p><b>Reeds genomen acties</b><br>' . $finding->getActionsTaken() . '</p>';
+
+//        var_dump($finding->getFollowUpActions());
+                // Vervolgacties indien aanwezig
+                if($finding->getFollowUpActions() !== null) {
+
+                        $vContentHTML .= '
                     <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
 
-                    for ($i=0; $i < count($finding->getFollowUpActions()) ; $i++) {
+//                    var_dump($finding->getFollowUpActions());
+
+                        for ($i = 0; $i < count($finding->getFollowUpActions()); $i++) {
                         $vContentHTML .= $finding->getFollowUpActions()[$i]->getSingleActionHTML($i);
-                    }
+//                        $vContentHTML .= $finding->getFollowUpActions()[$i]->getFollowUpActionsHTML();
+                            var_dump($finding->getFollowUpActions()[$i]->getDescription());
+                        }
                 }
 
-                $vContentHTML .= '</div></div>';
+
+                $vContentHTML .= '</div>';
+                $vContentHTML .= '<hr>';
+
             }
+
+
+            $vContentHTML .= '</div>';
+
         }
+
+
+//        foreach ($this->aThemes as $theme) {
+//
+//            // Follow Up Actions in case of a follow up
+////            if(count($this->aFollowUpActions) > 0) {
+////                $vContentHTML .= $this->getFollowUpActionsHTML();
+////            }
+//
+//
+//            $vContentHTML .= '
+//            <div class="inspection-theme">
+//            <p class="inspection-theme-header"><b>Thema: ' . $theme->getThemeName() . '</b></p>
+//            ';
+        
+        
+//            foreach ($theme->getFindings() as $finding) {
+//                $vContentHTML .= '
+//                <div class="inspection-finding">
+//
+//                <p><b>Omschrijving</b><br>' . $finding->getDescription() . '</p>
+//                <p><b>Type</b><br>' . $finding->getType() . '</p>
+//                <p><b>Gesproken met</b><br>' . $finding->getCollegues() . ' - ' . $finding->getDepartment() . '</p>
+//                </div>
+//                ';
+//
+//                // Images indien aanwezig
+//                if(count($finding->getImages()) > 0) {
+//
+//                    $vContentHTML .= '<table class="report-images">';
+//                    $vContentHTML .= '<tr>';
+//
+//                    for ($i=0; $i < count($finding->getImages()); $i++) {
+//                        $vContentHTML .= "<td><img class='rapport-afbeelding' alt='' src='" . $finding->getImages()[$i] . "'></td>";
+//                    }
+//
+//                    $vContentHTML .= '</tr>';
+//                    $vContentHTML .= '</table>';
+//                }
+//
+//                $vContentHTML .= '
+//                        <div class="inspection-finding">
+//
+//                        <p><b>Reeds genomen acties</b><br>' . $finding->getActionsTaken() . '</p>';
+//
+//
+//                // Vervolgacties indien aanwezig
+//                if(count($finding->getFollowUpActions()) > 0) {
+//
+//                    $vContentHTML .= '
+//                    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
+//
+//                    for ($i=0; $i < count($finding->getFollowUpActions()) ; $i++) {
+//                        $vContentHTML .= $finding->getFollowUpActions()[$i]->getSingleActionHTML($i);
+//                    }
+//                }
+//
+//                $vContentHTML .= '</div></div>';
+//            }
+//        }
         return $vContentHTML;
     }
 

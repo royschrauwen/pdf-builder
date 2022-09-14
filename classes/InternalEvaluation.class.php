@@ -46,9 +46,9 @@ public function getContentHTML() : string {
     <div class="page-content">
             <table class="rapport-section">
                 <tr>
-                    <td><b>Melder</b> ' . $this->vReportedByName . '</td>
-                    <td><b>Tel</b> ' . $this->vReportedByPhone . '</td>
-                    <td><b>E-mailadres</b> ' . $this->vReportedByEmail . '</td>
+                    <td><b>Melder</b><br>' . $this->vReportedByName . '</td>
+                    <td><b>Tel</b><br>' . $this->vReportedByPhone . '</td>
+                    <td><b>E-mailadres</b><br>' . $this->vReportedByEmail . '</td>
                 </tr>
 
                 <tr>
@@ -69,8 +69,13 @@ public function getContentHTML() : string {
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <b>Proces(sen) waar constatering heeft plaatsgevonden</b><br>' . $this->vProcess . '
-                    </td>
+        <b>Proces(sen) waar constatering heeft plaatsgevonden</b><br>';
+
+
+    $vContentHTML .= $this->aProcess ? Report::createListFromArray($this->aProcess) : '';
+
+
+    $vContentHTML .= '</td>
                 </tr>
                 <tr>
                     <td><b>Niveau impact</b> ' . $this->vImpactLevel . '</td>
@@ -112,12 +117,12 @@ public function getContentHTML() : string {
                 </tr>
                 <tr>
                     <td><b>Plandatum</b><br>
-                    ' . $this->vPlanningDate . '</td>
+                    ' . $this->dtPlanningDate . '</td>
                 </tr>
             </table>
     ';
 
-    // Follow Up Actions in case of a follow up
+    // Follow-Up Actions in case of a follow-up
     if(count($this->aFollowUpActions) > 0) {
         $vContentHTML .= $this->getFollowUpActionsHTML();
     }

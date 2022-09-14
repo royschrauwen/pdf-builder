@@ -31,19 +31,19 @@ class FollowUpAction {
 
 
     /**
-     * Generates the HTML for a single FOllow Up Action
+     * Generates the HTML for a single Follow-Up Action
      *
-     * @param int $i The index of the Follow Up Action
-     * @return string $vSingleActionHTML The Follow Up Action, formatted in HTML
+     * @param int $i The index of the Follow-Up Action
+     * @return string $vSingleActionHTML The Follow-Up Action, formatted in HTML
      */
         public function getSingleActionHTML(int $i) : string {
 
 
-            $vSingleActionHTML = '
+            return '
 
             <table class="vervolgacties">
                 <tr>
-                    <td colspan="5"><b>Vervolgactie ' . $i+1 . '</b></td>
+                    <td colspan="5"><b>Vervolgactie ' . ($i + 1) . '</b></td>
                 </tr>
                 <tr class="vervolgactie-omschrijving">
                     <td colspan="5">' . $this->vDescription . '</td>
@@ -62,8 +62,48 @@ class FollowUpAction {
                 </tr>
             </table>
             ';
-
-            return $vSingleActionHTML;
         }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->vDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActionType(): string
+    {
+        return $this->vActionType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReportedActionHolder(): string
+    {
+        return $this->vReportedActionHolder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkedActionHolder(): string
+    {
+        return $this->vLinkedActionHolder;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlannedDate(): string
+    {
+        return $this->vPlannedDate;
+    }
+
+
 
 }
