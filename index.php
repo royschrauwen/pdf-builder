@@ -19,12 +19,6 @@ require_once __DIR__ . '/classes/Finding.class.php';
 require_once __DIR__ . '/classes/PDFExport.class.php';
 
 
-// Dummy data for testing
-//include_once 'includes/dummyDataInternalEvaluation.inc.php';
-//include_once 'includes/dummyDataExternalEvaluation.inc.php';
-//include_once 'includes/dummyDataInspection.inc.php';
-
-
 // Different PDF Export Templates
 (new PDFExport(new Inspection(json_encode(file_get_contents(__DIR__ . '/includes/DummyInspection.json')))))->create(PDFExport::OUTPUT_INLINE);
 //(new PDFExport(new ExternalEvaluation(json_encode(file_get_contents(__DIR__ . '/includes/DummyEvaluation.json')))))->create(PDFExport::OUTPUT_INLINE);
