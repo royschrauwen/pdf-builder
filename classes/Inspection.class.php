@@ -96,25 +96,15 @@ class Inspection extends Report {
         </table>
         ';
 
-//        var_dump($this->aThemes);
-
-//        $vars = get_object_vars ( $this->aThemes );
-//        foreach($vars as $key=>$value) {
-//            var_dump($key);
-//            var_dump($value);
-//        }
 
         foreach ($this->aThemes as $vThemeName=>$aThemeFindingsObject) {
 
-//            var_dump($this->aThemes);
-
             $theme = new Theme($vThemeName, $aThemeFindingsObject['findings']);
 
-//            var_dump($theme);
+
             $vContentHTML .= '<div class="inspection-theme">';
             $vContentHTML .= $theme->printTeamName();
 
-//            var_dump($theme->getFindings());
 
             foreach ($theme->getFindings() as $finding) {
                 if (isset($finding)) {
@@ -153,19 +143,15 @@ class Inspection extends Report {
 
                         <p><b>Reeds genomen acties</b><br>' . $finding->getActionsTaken() . '</p>';
 
-//        var_dump($finding->getFollowUpActions());
                 // Vervolgacties indien aanwezig
                 if($finding->getFollowUpActions() !== null) {
 
                         $vContentHTML .= '
                     <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
 
-//                    var_dump($finding->getFollowUpActions());
 
                         for ($i = 0; $i < count($finding->getFollowUpActions()); $i++) {
-                        $vContentHTML .= $finding->getFollowUpActions()[$i]->getSingleActionHTML($i);
-//                        $vContentHTML .= $finding->getFollowUpActions()[$i]->getFollowUpActionsHTML();
-                            var_dump($finding->getFollowUpActions()[$i]->getDescription());
+                            $vContentHTML .= $finding->getFollowUpActions()[$i]->getSingleActionHTML($i);
                         }
                 }
 
@@ -180,65 +166,6 @@ class Inspection extends Report {
 
         }
 
-
-//        foreach ($this->aThemes as $theme) {
-//
-//            // Follow Up Actions in case of a follow up
-////            if(count($this->aFollowUpActions) > 0) {
-////                $vContentHTML .= $this->getFollowUpActionsHTML();
-////            }
-//
-//
-//            $vContentHTML .= '
-//            <div class="inspection-theme">
-//            <p class="inspection-theme-header"><b>Thema: ' . $theme->getThemeName() . '</b></p>
-//            ';
-        
-        
-//            foreach ($theme->getFindings() as $finding) {
-//                $vContentHTML .= '
-//                <div class="inspection-finding">
-//
-//                <p><b>Omschrijving</b><br>' . $finding->getDescription() . '</p>
-//                <p><b>Type</b><br>' . $finding->getType() . '</p>
-//                <p><b>Gesproken met</b><br>' . $finding->getCollegues() . ' - ' . $finding->getDepartment() . '</p>
-//                </div>
-//                ';
-//
-//                // Images indien aanwezig
-//                if(count($finding->getImages()) > 0) {
-//
-//                    $vContentHTML .= '<table class="report-images">';
-//                    $vContentHTML .= '<tr>';
-//
-//                    for ($i=0; $i < count($finding->getImages()); $i++) {
-//                        $vContentHTML .= "<td><img class='rapport-afbeelding' alt='' src='" . $finding->getImages()[$i] . "'></td>";
-//                    }
-//
-//                    $vContentHTML .= '</tr>';
-//                    $vContentHTML .= '</table>';
-//                }
-//
-//                $vContentHTML .= '
-//                        <div class="inspection-finding">
-//
-//                        <p><b>Reeds genomen acties</b><br>' . $finding->getActionsTaken() . '</p>';
-//
-//
-//                // Vervolgacties indien aanwezig
-//                if(count($finding->getFollowUpActions()) > 0) {
-//
-//                    $vContentHTML .= '
-//                    <p style="margin-left: 0.25rem"><b>Vervolgacties</b></p>';
-//
-//                    for ($i=0; $i < count($finding->getFollowUpActions()) ; $i++) {
-//                        $vContentHTML .= $finding->getFollowUpActions()[$i]->getSingleActionHTML($i);
-//                    }
-//                }
-//
-//                $vContentHTML .= '</div></div>';
-//            }
-//        }
         return $vContentHTML;
     }
 

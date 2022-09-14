@@ -34,7 +34,38 @@ class IncidentReport extends Report {
     protected ?array $aDirectActionsWho;
     protected ?string $vDirectActionsHow;
     protected ?string $dtDirectActionsWhen;
-
+    /**
+     * @var array|mixed|null
+     */
+    private $vWitnessType;
+    /**
+     * @var array|mixed|null
+     */
+    private $vWitnessName;
+    /**
+     * @var false|string
+     */
+    private $dtInjuredAbsenceEnd;
+    /**
+     * @var false|string
+     */
+    private $dtInjuredAbsenceStart;
+    /**
+     * @var array|mixed|null
+     */
+    private $vInjuredConsequences;
+    /**
+     * @var array|mixed|null
+     */
+    private $vInjuredInjuryType;
+    /**
+     * @var array|mixed|null
+     */
+    private $vInjuredPersonType;
+    /**
+     * @var array|mixed|string
+     */
+    private $vLocationDescription;
 
 
     function __construct(string $jsonData) {
@@ -340,7 +371,7 @@ class IncidentReport extends Report {
             <tr>
                 <td>
                     <b>Is het reeds opgelost? </b>
-                    ' . $this->booleanToYesNo($this->get('bIsSolved')) . '
+                    ' . $this->booleanToYesNo($this->bIsSolved) . '
                 </td>
             </tr>
             <tr>

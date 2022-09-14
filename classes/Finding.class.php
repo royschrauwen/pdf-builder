@@ -56,7 +56,7 @@ class Finding {
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getType(): int
     {
@@ -64,7 +64,7 @@ class Finding {
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getColleagues(): array
     {

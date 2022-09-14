@@ -38,66 +38,7 @@ abstract class Report {
     protected ?string $dtPlanningDate;
     protected ?array $aFollowUpActions;
     protected ?string $vEffectiveness;
-    
-    function __construct (
-//        string $vWorkingTitle,
-//        string $idReport,
-//        string $vType,
-//        string $dtDateTime,
-//        string $vDepartment,
-//        string $vReportedByName,
-//        string $vReportedByPhone,
-//        string $vReportedByEmail,
-//        string $vCause,
-//        string $vReference,
-//        string $vCustomerInternal,
-//        string $vDescription,
-//        string $vNorm,
-//        string $vNormParagraph,
-//        string $vProcess,
-//        string $vImpactLevel,
-//        string $vSegment,
-//        string $vProjectNameNumber,
-//        string $vClientName,
-//        array  $aImages,
-//        string $vCauseDescription,
-//        string $vCauseAnalysis,
-//        string $vSizeAnalysis,
-//        string $vHowShouldBeSolved,
-//        string $vActionsTaken,
-//        string $vPlanningDate,
-//        array  $aFollowUpActions,
-//        string $vEffectiveness
-    ) {
-//        $this->vWorkingTitle = $vWorkingTitle;
-//        $this->idReport = $idReport;
-//        $this->vType = $vType;
-//        $this->dtDateTime = $dtDateTime;
-//        $this->vDepartment = $vDepartment;
-//        $this->vReportedByName = $vReportedByName;
-//        $this->vReportedByPhone = $vReportedByPhone;
-//        $this->vReportedByEmail = $vReportedByEmail;
-//        $this->vCause = $vCause;
-//        $this->vReference = $vReference;
-//        $this->vCustomerInternal = $vCustomerInternal;
-//        $this->vDescription = $vDescription;
-//        $this->vNorm = $vNorm;
-//        $this->vNormParagraph = $vNormParagraph;
-//        $this->vProcess = $vProcess;
-//        $this->vImpactLevel = $vImpactLevel;
-//        $this->vSegment = $vSegment;
-//        $this->vProjectNameNumber = $vProjectNameNumber;
-//        $this->vClientName = $vClientName;
-//        $this->aImages = $aImages;
-//        $this->vCauseDescription = $vCauseDescription;
-//        $this->vCauseAnalysis = $vCauseAnalysis;
-//        $this->vSizeAnalysis = $vSizeAnalysis;
-//        $this->vHowShouldBeSolved = $vHowShouldBeSolved;
-//        $this->vActionsTaken = $vActionsTaken;
-//        $this->vPlanningDate = $vPlanningDate;
-//        $this->aFollowUpActions = $aFollowUpActions;
-//        $this->vEffectivenes = $vEffectiveness;
-    }
+
 
     abstract public function getHeaderHTML(): string;
     abstract public function getFooterHTML(): string;
@@ -126,35 +67,6 @@ abstract class Report {
     {
         return $this->vDepartment;
     }
-
-
-
-
-
-
-//    /**
-//     * Get's the value of an object's property.
-//     *
-//     * @param string $property The property to be retreived
-//     * @return mixed|null The value of the requested property | The property does not exist on this object
-//     */
-//    public function get(string $property) : mixed
-//    {
-//        return array_key_exists($property, get_object_vars($this)) ? $this->{$property} : null;
-//    }
-//
-//
-//    /**
-//     * Set's the value for a property from the calling object.
-//     *
-//     * @param string $property The property to be set
-//     * @param mixed $value The value to be set
-//     */
-//    public function set(string $property, mixed $value)
-//    {
-//        $this->{$property} = $value;
-//    }
-
 
     public static function createListFromArray(array $array){
         if(count($array) == 1) {
@@ -221,7 +133,6 @@ abstract class Report {
                      $this->aFollowUpActions[$i]['tsPlanned']
             );
             $vFollowUpActionHTML .= $followUpAction->getSingleActionHTML($i);
-            //$vFollowUpActionHTML .= $this->aFollowUpActions[$i]->getSingleActionHTML($i);
         }
         
         return $vFollowUpActionHTML;

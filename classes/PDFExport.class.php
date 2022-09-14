@@ -1,4 +1,7 @@
-<?php
+<?php /** @noinspection PhpUnused */
+/** @noinspection PhpUnused */
+
+/** @noinspection PhpUnused */
 
 use Mpdf\HTMLParserMode;
 use Mpdf\Mpdf;
